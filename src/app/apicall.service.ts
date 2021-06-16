@@ -9,6 +9,8 @@ import { Observable } from 'rxjs';
 })
 export class apiCallService {
 
+  url = 'https://swapi.co/api/people/';
+
   constructor(private http: HttpClient) { }
 
   getAllPeople(): Observable<People[]> {

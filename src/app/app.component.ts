@@ -6,7 +6,7 @@ import { apiCallService } from './apicall.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'starWarsAPI';
   allPeople: People[] | undefined;
   constructor(private apiCallService: apiCallService) { }
@@ -15,7 +15,7 @@ export class AppComponent {
     this.apiCallService.getAllPeople().subscribe(
       (data: People[]) => this.allPeople = data,
         (err: any) => console.log(err),
-        () => console.log('All done getting people. ' + JSON.stringify(this.allPeople))
+        () => console.log('All done getting people. ', this.allPeople)
     )
   }
 
