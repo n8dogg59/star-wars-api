@@ -1,26 +1,10 @@
-<table>
-  <thead>
-      <tr>
-          <th>Name</th>
-          <th>Height</th>
-          <th>Mass</th>
-          <th>Hair Color</th>
-          <th>Skin Color</th>
-          <th>Eye Color</th>
-          <th>Birth Year</th>
-          <th>Gender</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr *ngFor="let person of peopleArray">
-          <td>{{person.name}}</td>
-          <td>{{person.height}}</td>
-          <td>{{person.mass}}</td>
-          <td>{{person.hair_color}}</td>
-          <td>{{person.skin_color}}</td>
-          <td>{{person.eye_color}}</td>
-          <td>{{person.birth_year}}</td>
-          <td>{{person.gender}}</td>
-      </tr>
-  </tbody>
-</table>
+<nav class='navbar navbar-expand navbar-light bg-light'>
+  <a class='navbar-brand'>{{title}}</a>
+  <ul class='nav mav-pills'>
+    <li><a class='nav-link' routerLink='/home'>Home</a></li>
+    <li><a class='nav-link' routerLink='/people'>People</a></li>
+  </ul>
+</nav>
+<div class='container'>
+  <router-outlet></router-outlet>
+</div>  

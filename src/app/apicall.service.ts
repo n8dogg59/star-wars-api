@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { People } from './people';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
+import { catchError, tap } from 'rxjs/operators'
 
 
 @Injectable({
@@ -9,18 +10,35 @@ import { Observable } from 'rxjs';
 })
 export class apiCallService {
 
-  url = 'https://swapi.co/api/people/';
+  private url = 'https://swapi.dev/api/people/';
 
   constructor(private http: HttpClient) { }
 
   getAllPeople(): Observable<People[]> {
     console.log("Getting all people.")
-    return this.http.get<People[]>('https://swapi.dev/api/people/');
+    return this.http.get<People[]>(this.url).pipe(
+      tap(data => console.log('All people ', JSON.stringify(data))),
+      catchError(this.handleError)
+    )
+    ;
   }
   
-  // public nextPage: string = "";
-  // public getPeople(url?: string){
-  //   return this.httpClient.get<People[]>(`https://swapi.dev/api/people/`);
+  getPerson(id: string): Observable<People> {
+    console.log("Getting Person")
+    return this.http.get<People>(this.url + `${id}`)
+  }
+
+  private handleError(err: HttpErrorResponse) {
+    let errorMessage = '';
+    if (err.error instanceof ErrorEvent) {
+      errorMessage = `An error occurred: ${err.error.message}`;      
+    } else {
+      errorMessage = `Server returned code: ${err.status}, error message is: ${err.message}`;
+    }
+    console.error(errorMessage);
+    return throwError(errorMessage);
+  }
+
 }
 
 
