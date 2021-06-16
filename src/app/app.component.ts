@@ -9,13 +9,26 @@ import { apiCallService } from './apicall.service';
 export class AppComponent implements OnInit {
   title = 'starWarsAPI';
   allPeople: People[] | undefined;
+  stringJson: any;
+  stringObject: any;
+  peopleArray: any;
   constructor(private apiCallService: apiCallService) { }
 
   ngOnInit(): void {
     this.apiCallService.getAllPeople().subscribe(
       (data: People[]) => this.allPeople = data,
         (err: any) => console.log(err),
-        () => console.log('All done getting people. ', this.allPeople)
+        () => { 
+          this.stringJson = JSON.stringify(this.allPeople);
+          console.log("String json object :", this.stringJson);
+          console.log("Type :", typeof this.stringJson);
+          console.log('All done getting people. ', this.allPeople)
+
+          this.stringObject = JSON.parse(this.stringJson);
+          this.peopleArray = this.stringObject.results;
+          console.log(this.peopleArray);
+          console.log("JSON object -", this.stringObject);
+        }
     )
   }
 
