@@ -1,8 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { People } from './people';
+
 import { Observable, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators'
+import { Starships } from './starships';
+import { Planets } from './planets';
 
 
 @Injectable({
@@ -10,13 +13,13 @@ import { catchError, tap } from 'rxjs/operators'
 })
 export class apiCallService {
 
-  private url = 'https://swapi.dev/api/people/';
+  private url = 'https://swapi.dev/api/';
 
   constructor(private http: HttpClient) { }
 
   getAllPeople(): Observable<People[]> {
     console.log("Getting all people.")
-    return this.http.get<People[]>(this.url).pipe(
+    return this.http.get<People[]>(this.url + "people").pipe(
       tap(data => console.log('All people ', JSON.stringify(data))),
       catchError(this.handleError)
     )
@@ -26,6 +29,24 @@ export class apiCallService {
   getPerson(id: string): Observable<People> {
     console.log("Getting Person")
     return this.http.get<People>(this.url + `${id}`)
+  }
+
+  getAllStarships(): Observable<Starships[]> {
+    console.log("Getting all starships.")
+    return this.http.get<Starships[]>(this.url + "starships").pipe(
+      tap(data => console.log('All starships ', JSON.stringify(data))),
+      catchError(this.handleError)
+    )
+    ;
+  }
+
+  getAllPlanets(): Observable<Planets[]> {
+    console.log("Getting all planets.")
+    return this.http.get<Planets[]>(this.url + "planets").pipe(
+      tap(data => console.log('All planets ', JSON.stringify(data))),
+      catchError(this.handleError)
+    )
+    ;
   }
 
   private handleError(err: HttpErrorResponse) {

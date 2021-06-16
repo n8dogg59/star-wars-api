@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  templateUrl: './person-detail.component.html',
-  styleUrls: ['./person-detail.component.css']
+  templateUrl: './person-detail.component.html'
 })
 export class PersonDetailComponent implements OnInit {
   pageTitle: string = 'Person Detail';

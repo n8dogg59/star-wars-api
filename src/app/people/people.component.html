@@ -13,7 +13,10 @@
     </thead>
     <tbody>
         <tr *ngFor="let person of peopleArray">
-            <td>{{person.name}}</td>
+            <td>
+                <a [routerLink]="['/people', person.name]"></a>    
+                {{person.name}}
+            </td>
             <td>{{person.height}}</td>
             <td>{{person.mass}}</td>
             <td>{{person.hair_color}}</td>

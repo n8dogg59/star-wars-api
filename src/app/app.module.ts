@@ -7,13 +7,17 @@ import { AppComponent } from './app.component';
 import { PeopleComponent } from './people/people.component';
 import { PersonDetailComponent } from './people/person-detail.component';
 import { HomeComponent } from './home/home.component';
+import { StarshipsComponent } from './starships/starships.component';
+import { PlanetsComponent } from './planets/planets.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PeopleComponent,
     PersonDetailComponent,
-    HomeComponent
+    HomeComponent,
+    StarshipsComponent,
+    PlanetsComponent
   ],
   imports: [
     BrowserModule,
