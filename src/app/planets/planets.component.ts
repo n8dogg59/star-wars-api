@@ -22,10 +22,9 @@ export class PlanetsComponent implements OnInit , OnDestroy {
         (data: Planets[]) => {
             this.allPlanets = data;
             this.stringJson = JSON.stringify(this.allPlanets);  
-            console.log(this.stringJson);
             this.stringObject = JSON.parse(this.stringJson);
             this.planetsArray = this.stringObject.results;
-            console.log('All done getting people. ', this.planetsArray)
+            console.log('All done getting planets. ', this.planetsArray)
 
         },
           (err: any) => console.log(err)

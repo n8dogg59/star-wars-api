@@ -22,13 +22,13 @@ export class apiCallService {
     return this.http.get<People[]>(this.url + "people").pipe(
       tap(data => console.log('All people ', JSON.stringify(data))),
       catchError(this.handleError)
-    )
-    ;
+    );
   }
   
   getPerson(id: string): Observable<People> {
     console.log("Getting Person")
-    return this.http.get<People>(this.url + `${id}`)
+    console.log(this.url + `people/${id}`)
+    return this.http.get<People>(this.url + `people/${id}`)
   }
 
   getAllStarships(): Observable<Starships[]> {

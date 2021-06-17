@@ -22,10 +22,9 @@ export class StarshipsComponent implements OnInit, OnDestroy {
         (data: Starships[]) => {
             this.allStarships = data;
             this.stringJson = JSON.stringify(this.allStarships);  
-            console.log(this.stringJson);
             this.stringObject = JSON.parse(this.stringJson);
             this.starshipsArray = this.stringObject.results;
-            console.log('All done getting people. ', this.starshipsArray)
+            console.log('All done getting starships. ', this.starshipsArray)
 
         },
           (err: any) => console.log(err)

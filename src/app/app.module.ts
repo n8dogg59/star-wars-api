@@ -17,8 +17,7 @@ import { PlanetsComponent } from './planets/planets.component';
     PersonDetailComponent,
     HomeComponent,
     StarshipsComponent,
-    PlanetsComponent
-  ],
+    PlanetsComponent  ],
   imports: [
     BrowserModule,
     HttpClientModule,

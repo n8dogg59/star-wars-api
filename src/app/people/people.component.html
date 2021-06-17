@@ -12,10 +12,10 @@
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let person of peopleArray">
+        <tr *ngFor="let person of peopleArray; let i = index">
             <td>
-                <a [routerLink]="['/people', person.name]"></a>    
-                {{person.name}}
+                <a [routerLink]="['/people', i + 1 ]">    
+                {{person.name}}</a>
             </td>
             <td>{{person.height}}</td>
             <td>{{person.mass}}</td>
