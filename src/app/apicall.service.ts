@@ -36,8 +36,7 @@ export class apiCallService {
     return this.http.get<Starships[]>(this.url + "starships").pipe(
       tap(data => console.log('All starships ', JSON.stringify(data))),
       catchError(this.handleError)
-    )
-    ;
+    );
   }
 
   getAllPlanets(): Observable<Planets[]> {
@@ -45,8 +44,13 @@ export class apiCallService {
     return this.http.get<Planets[]>(this.url + "planets").pipe(
       tap(data => console.log('All planets ', JSON.stringify(data))),
       catchError(this.handleError)
-    )
-    ;
+    );
+  }
+
+  getPlanet(id: string): Observable<Planets> {
+    console.log("Getting Planet")
+    console.log(this.url + `planets/${id}`)
+    return this.http.get<Planets>(this.url + `planets/${id}`)
   }
 
   private handleError(err: HttpErrorResponse) {

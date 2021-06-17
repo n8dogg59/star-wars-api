@@ -7,6 +7,7 @@ import { Subscription } from 'rxjs';
   selector: 'sw-planets',
   templateUrl: './planets.component.html'
 })
+
 export class PlanetsComponent implements OnInit , OnDestroy {
 
     allPlanets: Planets[] | undefined;

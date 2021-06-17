@@ -9,6 +9,7 @@ import { PersonDetailComponent } from './people/person-detail.component';
 import { HomeComponent } from './home/home.component';
 import { StarshipsComponent } from './starships/starships.component';
 import { PlanetsComponent } from './planets/planets.component';
+import { PlanetDetailComponent } from './planets/planet-detail.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { PlanetsComponent } from './planets/planets.component';
     PersonDetailComponent,
     HomeComponent,
     StarshipsComponent,
-    PlanetsComponent  ],
+    PlanetsComponent,
+    PlanetDetailComponent  ],
   imports: [
     BrowserModule,
     HttpClientModule,

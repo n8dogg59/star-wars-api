@@ -1,0 +1,49 @@
+<div class='card'>
+    <div class='card-header'>
+      {{pageTitle + ': ' + planetDetail?.name}}
+    </div>
+  
+    <div class='card-body'
+         *ngIf='planetDetail'>
+      <div class='row'>
+        <div class='col-md-8'>
+          <div class='row'>
+            <div class='col-md-4'>Name:</div>
+            <div class='col-md-8'>{{planetDetail.name}}</div>
+          </div>
+          <div class='row'>
+            <div class='col-md-4'>Climate:</div>
+            <div class='col-md-8'>{{planetDetail.climate }}</div>
+          </div>
+          <div class='row'>
+            <div class='col-md-4'>Population:</div>
+            <div class='col-md-8'>{{planetDetail.population }}</div>
+          </div>
+          <div class='row'>
+            <div class='col-md-4'>Rotation Period:</div>
+            <div class='col-md-8'>{{planetDetail.rotation_period}}</div>
+          </div>
+          <div class='row'>
+            <div class='col-md-4'>Orbital Period:</div>
+            <div class='col-md-8'>{{planetDetail.orbital_period}}</div>
+          </div>
+          <div class='row'>
+            <div class='col-md-4'>Diameter:</div>
+            <div class='col-md-8'>{{planetDetail.diameter}}</div>
+          </div>
+          <div class='row'>
+            <div class='col-md-4'>Gravity:</div>
+            <div class='col-md-8'>{{planetDetail.gravity}}</div>
+          </div>
+          <div class='row'>
+            <div class='col-md-4'>Terrain:</div>
+            <div class='col-md-8'>{{planetDetail.terrain}}</div>
+          </div>
+          <div class='row'>
+            <div class='col-md-4'>Surface Water:</div>
+            <div class='col-md-8'>{{planetDetail.surface_water}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

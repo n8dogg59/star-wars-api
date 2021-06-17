@@ -3,11 +3,9 @@ import { People } from "../people";
 import { apiCallService } from "../apicall.service";
 import { Subscription } from "rxjs";
 
-
 @Component({
     selector: 'sw-people',
     templateUrl: './people.component.html'
-    // styleUrls: ['./app.component.css']
   })
 
 export class PeopleComponent implements OnInit, OnDestroy{

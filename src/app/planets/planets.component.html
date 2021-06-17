@@ -13,10 +13,10 @@
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let planet of planetsArray">
+        <tr *ngFor="let planet of planetsArray; let i = index">
             <td>
-                <a [routerLink]="['/planets', planet.name]"></a>    
-                {{planet.name}}
+                <a [routerLink]="['/planets', i + 1]">    
+                {{planet.name}}</a>
             </td>
             <td>{{planet.name}}</td>
             <td>{{planet.rotation_period}}</td>
@@ -25,7 +25,7 @@
             <td>{{planet.climate}}</td>
             <td>{{planet.gravity}}</td>
             <td>{{planet.terrain}}</td>
-            <td>{{planet.surface_wter}}</td>
+            <td>{{planet.surface_water}}</td>
             <td>{{planet.population}}</td>
         </tr>
     </tbody>
