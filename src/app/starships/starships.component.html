@@ -20,8 +20,8 @@
     <tbody>
         <tr *ngFor="let starship of starshipsArray">
             <td>
-                <a [routerLink]="['/starships', starship.name]"></a>    
-                {{starship.name}}
+                <a [routerLink]="['/starships', starship.name]">    
+                {{starship.name}}</a>
             </td>
             <td>{{starship.height}}</td>
             <td>{{starship.model}}</td>
