@@ -10,7 +10,6 @@ import { HomeComponent } from './home/home.component';
 import { StarshipsComponent } from './starships/starships.component';
 import { PlanetsComponent } from './planets/planets.component';
 import { PlanetDetailComponent } from './planets/planet-detail.component';
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -19,7 +18,8 @@ import { PlanetDetailComponent } from './planets/planet-detail.component';
     HomeComponent,
     StarshipsComponent,
     PlanetsComponent,
-    PlanetDetailComponent  ],
+    PlanetDetailComponent
+  ],
   imports: [
     BrowserModule,
     HttpClientModule,
