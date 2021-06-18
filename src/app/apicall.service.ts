@@ -39,6 +39,12 @@ export class apiCallService {
     );
   }
 
+  getStarship(id: string): Observable<Starships> {
+    console.log("Getting Starship")
+    console.log(this.url + `starships/${id}`)
+    return this.http.get<Starships>(this.url + `starships/${id}`)
+  }
+
   getAllPlanets(): Observable<Planets[]> {
     console.log("Getting all planets.")
     return this.http.get<Planets[]>(this.url + "planets").pipe(

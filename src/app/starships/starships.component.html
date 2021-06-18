@@ -8,21 +8,17 @@
             <th>Cost in Credits</th>
             <th>Length</th>
             <th>Max Atmosphering Speed</th>
-            <th>Cre2</th>
+            <th>Crew</th>
             <th>Passengers</th>
             <th>Cargo Capacity</th>
             <th>Consumables</th>
             <th>Hyperdrive Rating</th>
-            <th>MGLT</th>
             <th>Starship Class</th>
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let starship of starshipsArray">
-            <td>
-                <a [routerLink]="['/starships', starship.name]"></a>    
-                {{starship.name}}
-            </td>
+        <tr *ngFor="let starship of starshipsArray, let i = index">
+            <td>{{starship.name}}</td>
             <td>{{starship.height}}</td>
             <td>{{starship.model}}</td>
             <td>{{starship.manufacturer}}</td>
@@ -34,7 +30,6 @@
             <td>{{starship.cargo_capacity}}</td>
             <td>{{starship.consumables}}</td>
             <td>{{starship.hyperdrive_rating}}</td>
-            <td>{{starship.MGLT}}</td>
             <td>{{starship.starship_class}}</td>
         </tr>
     </tbody>
