@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from "@angular/core";
 import { People } from "../people";
 import { apiCallService } from "../apicall.service";
 import { Subscription } from "rxjs";
+import * as HighCharts from 'highcharts';
 
 @Component({
     selector: 'sw-people',
@@ -9,7 +10,6 @@ import { Subscription } from "rxjs";
   })
 
 export class PeopleComponent implements OnInit, OnDestroy{
-    
     allPeople: People[] | undefined;
     stringJson: any;
     stringObject: any;

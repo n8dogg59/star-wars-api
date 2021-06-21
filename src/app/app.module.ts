@@ -10,6 +10,7 @@ import { HomeComponent } from './home/home.component';
 import { StarshipsComponent } from './starships/starships.component';
 import { PlanetsComponent } from './planets/planets.component';
 import { PlanetDetailComponent } from './planets/planet-detail.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,7 +24,8 @@ import { PlanetDetailComponent } from './planets/planet-detail.component';
   imports: [
     BrowserModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]
