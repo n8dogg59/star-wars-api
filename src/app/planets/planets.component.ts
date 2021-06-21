@@ -193,17 +193,25 @@ export class PlanetsComponent implements OnInit , OnDestroy {
     ngOnInit(): void {
       this.sub = this.apiCallService.getAllPlanets().subscribe(
         (data: Planets[]) => {
+            this.nameArray = [];
+            this.popArray = [];
             this.allPlanets = data;
             this.stringJson = JSON.stringify(this.allPlanets);  
             this.stringObject = JSON.parse(this.stringJson);
             this.planetsArray = this.stringObject.results;
             console.log('All done getting planets. ', this.planetsArray)
             console.log('length of array is ', this.planetsArray.length);
-
+            for (let i = 0; i < this.planetsArray.length; i++) {
+              this.nameArray.push(this.planetsArray[i].name);
+              this.popArray.push(this.planetsArray[i].population)
+            }
+            console.log(this.nameArray);
+            console.log(this.popArray);
         },
           (err: any) => console.log(err)
       )
     }
+    
 
     ngOnDestroy() {
         this.sub.unsubscribe();
