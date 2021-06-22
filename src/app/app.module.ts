@@ -13,6 +13,7 @@ import { PlanetsComponent } from './planets/planets.component';
 import { PlanetDetailComponent } from './planets/planet-detail.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HighchartsChartModule } from 'highcharts-angular';
+import { CommonModule } from '@angular/common';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import { HighchartsChartModule } from 'highcharts-angular';
     AppRoutingModule,
     NgbModule,
     FormsModule,
-    HighchartsChartModule
+    HighchartsChartModule,
+    CommonModule
   ],
   providers: [],
   bootstrap: [AppComponent]
