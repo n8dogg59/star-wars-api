@@ -27,7 +27,7 @@ export class PeopleComponent implements OnInit, OnDestroy{
         type: 'pie'
       },
       title: {
-        text: 'Browser market shares in January, 2018'
+        text: "Person's Height as a Percentage of Total Height"
       },
       tooltip: {
         pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
