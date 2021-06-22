@@ -11,69 +11,17 @@ import * as Highcharts from 'highcharts';
   })
 
 export class PeopleComponent implements OnInit, OnDestroy{
-    
+    dataAvailable = false;
     allPeople: People[] | undefined;
     stringJson: any;
     stringObject: any;
     peopleArray: any;
+    dataArray: any;
     sub!: Subscription;
     updateFlag = false;
     highcharts: typeof Highcharts = Highcharts;
 
     chartOptions: Highcharts.Options = {
-      // chart: {
-      //   plotBorderWidth: 0,
-      //   plotShadow: false
-      // },
-      // title: {
-      //   text: 'Browser<br>shares<br>2017',
-      //   align: 'center',
-      //   verticalAlign: 'middle',
-      //   y: 60
-      // },
-      // tooltip: {
-      //   pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-      // },
-      // accessibility: {
-      //   point: {
-      //       valueSuffix: '%'
-      //   }
-      // },
-      // plotOptions: {
-      //   pie: {
-      //       dataLabels: {
-      //           enabled: true,
-      //           distance: -50,
-      //           style: {
-      //               fontWeight: 'bold',
-      //               color: 'white'
-      //           }
-      //       },
-      //       startAngle: -90,
-      //       endAngle: 90,
-      //       center: ['50%', '75%'],
-      //       size: '110%'
-      //   }
-      // },
-      // series: [{
-      //   type: 'pie',
-      //   name: 'Browser share',
-      //   innerSize: '50%',
-      //   data: [
-      //       ['Chrome', 58.9],
-      //       ['Firefox', 13.29],
-      //       ['Internet Explorer', 13],
-      //       ['Edge', 3.78],
-      //       ['Safari', 3.42],
-      //       {
-      //           name: 'Other',
-      //           y: 7.61,
-      //           dataLabels: {
-      //               enabled: false
-      //           }
-      //       }
-      //   ]
-      // }]
       chart: {
         plotShadow: false,
         type: 'pie'
@@ -139,18 +87,44 @@ export class PeopleComponent implements OnInit, OnDestroy{
     constructor(private apiCallService: apiCallService) { }
   
     ngOnInit(): void {
+      let totalHeight = 0;
       this.sub = this.apiCallService.getAllPeople().subscribe(
         (data: People[]) => {
+            this.dataArray = [];
             this.allPeople = data;
             this.stringJson = JSON.stringify(this.allPeople);  
             this.stringObject = JSON.parse(this.stringJson);
             this.peopleArray = this.stringObject.results;
             console.log('All done getting people. ', this.peopleArray)
-
+            console.log('length of array is ', this.peopleArray.length);
+            for (let i = 0; i < this.peopleArray.length; i++) {
+              let peopleHeight = parseInt(this.peopleArray[i].height);
+              totalHeight += peopleHeight;              
+            }
+            for (let i = 0; i < this.peopleArray.length; i++) {
+              let personHeight = parseInt(this.peopleArray[i].height);
+              let personName = this.peopleArray[i].name;
+              this.dataArray.push({name: personName, y: personHeight});
+              this.updateOptions(this.dataArray);
+            }        
         },
           (err: any) => console.log(err)
       )
     }
+
+    updateOptions(dataArray: any) {
+      console.log(dataArray);
+      this.chartOptions.series = [
+        {
+          name: 'Heights',
+          colorByPoint: true,
+          type: 'pie',
+          data: dataArray
+        }
+      ]
+      this.dataAvailable = true;
+      console.log(this.dataAvailable);
+    }    
 
     ngOnDestroy() {
         this.sub.unsubscribe();

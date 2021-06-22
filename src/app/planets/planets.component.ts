@@ -3,7 +3,6 @@ import { Planets } from '../planets';
 import { apiCallService } from '../apicall.service';
 import { Subscription } from 'rxjs';
 import * as Highcharts from 'highcharts';
-import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'sw-planets',
@@ -78,7 +77,7 @@ export class PlanetsComponent implements OnInit , OnDestroy {
       }]
     }
 
-    
+
     
     constructor(private apiCallService: apiCallService) { }
   
