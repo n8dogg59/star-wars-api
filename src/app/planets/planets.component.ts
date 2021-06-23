@@ -97,9 +97,6 @@ export class PlanetsComponent implements OnInit , OnDestroy {
               this.nameArray.push(this.planetsArray[i].name);
               this.diameterArray.push(parseInt(diameter));
             }
-            console.log(this.nameArray);
-            console.log(this.diameterArray);
-            console.log(this.dataAvailable);
             this.updateOptions(this.nameArray, this.diameterArray);
         },
           (err: any) => console.log(err)

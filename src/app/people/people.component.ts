@@ -17,11 +17,15 @@ export class PeopleComponent implements OnInit, OnDestroy{
     stringObject: any;
     peopleArray: any;
     dataArray: any;
+    nameArray: any;
+    heightArray: any;
+    massArray: any;
+    chartOptions: any;
     sub!: Subscription;
     updateFlag = false;
     highcharts: typeof Highcharts = Highcharts;
 
-    chartOptions: Highcharts.Options = {
+    pieChartOptions: Highcharts.Options = {
       chart: {
         plotShadow: false,
         type: 'pie'
@@ -83,6 +87,62 @@ export class PeopleComponent implements OnInit, OnDestroy{
       
     }
 
+    lineColumnChartOptions: Highcharts.Options = {         
+      chart : {
+         zoomType: 'x'
+      },
+      title : {
+         text: 'Star Wars Characters Height and Weight'   
+      },   
+      subtitle : {
+        text: 'Source: <a href="https://swapi.dev/">swapi.dev</a>'
+      },
+      yAxis : [
+         { // Primary yAxis
+            labels: {
+               format: '{value} kg',
+                  style: {
+                     color: '#000000'
+                  }
+            },
+            title: {
+               text: 'Height',
+               style: {
+                  color: '#000000'
+               }
+            }
+         }, 
+         { // Secondary yAxis
+            title: {
+               text: 'Weight',
+               style: {
+                  color: '#000000'
+               }
+            },
+            labels: {
+               format: '{value} cm',
+               style: {
+                  color: '#000000'
+               }
+            },
+            opposite: true
+         }
+      ],
+      tooltip: {
+         shared: true
+      },
+      legend: {
+         layout: 'vertical',
+         align: 'left',
+         x: 65,
+         verticalAlign: 'top',
+         y: 60,
+         floating: true,
+               
+         backgroundColor: '#FFFFFF'
+      }
+   };
+
     
     constructor(private apiCallService: apiCallService) { }
   
@@ -90,31 +150,37 @@ export class PeopleComponent implements OnInit, OnDestroy{
       let totalHeight = 0;
       this.sub = this.apiCallService.getAllPeople().subscribe(
         (data: People[]) => {
+            this.nameArray = [];
             this.dataArray = [];
+            this.heightArray = [];
+            this.massArray = [];
             this.allPeople = data;
             this.stringJson = JSON.stringify(this.allPeople);  
             this.stringObject = JSON.parse(this.stringJson);
             this.peopleArray = this.stringObject.results;
             console.log('All done getting people. ', this.peopleArray)
-            console.log('length of array is ', this.peopleArray.length);
             for (let i = 0; i < this.peopleArray.length; i++) {
               let peopleHeight = parseInt(this.peopleArray[i].height);
               totalHeight += peopleHeight;              
             }
             for (let i = 0; i < this.peopleArray.length; i++) {
               let personHeight = parseInt(this.peopleArray[i].height);
+              let personMass = parseInt(this.peopleArray[i].mass);
               let personName = this.peopleArray[i].name;
               this.dataArray.push({name: personName, y: personHeight});
-              this.updateOptions(this.dataArray);
+              this.nameArray.push(personName);
+              this.massArray.push(personMass);
+              this.heightArray.push(personHeight);
             }        
+            this.updateOptions(this.dataArray, this.nameArray, this.massArray, this.heightArray);
+
         },
           (err: any) => console.log(err)
       )
     }
 
-    updateOptions(dataArray: any) {
-      console.log(dataArray);
-      this.chartOptions.series = [
+    updateOptions(dataArray: any, nameArray: any, massArray: any, heightArray:any) {
+      this.pieChartOptions.series = [
         {
           name: 'Heights',
           colorByPoint: true,
@@ -122,8 +188,40 @@ export class PeopleComponent implements OnInit, OnDestroy{
           data: dataArray
         }
       ]
+
+      this.lineColumnChartOptions.xAxis = [
+        {
+          categories: nameArray
+        }
+      ];
+
+      this.lineColumnChartOptions.series = [
+          {
+             name: 'Height',
+             type: 'column',
+             color: '#483D8B',
+             yAxis: 1,
+             data: heightArray,
+             tooltip: {
+                valueSuffix: ' cm'
+             }
+          }, 
+          {
+             name: 'Weight',
+             type: 'spline',
+             color: '#006400',
+             data: massArray,
+             tooltip: {
+                valueSuffix: ' kg'
+             }
+          }
+      ]
+
       this.dataAvailable = true;
-      console.log(this.dataAvailable);
+      this.chartOptions = [
+        { chartConfig: this.pieChartOptions },
+        { chartConfig: this.lineColumnChartOptions }
+      ]
     }    
 
     ngOnDestroy() {
