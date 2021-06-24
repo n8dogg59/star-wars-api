@@ -3,11 +3,13 @@ import { People } from "../people";
 import { apiCallService } from "../apicall.service";
 import { Subscription } from "rxjs";
 import * as Highcharts from 'highcharts';
-
+import HC_exporting from 'highcharts/modules/exporting';
+import { createFalse } from "typescript";
 
 @Component({
     selector: 'sw-people',
-    templateUrl: './people.component.html'
+    templateUrl: './people.component.html',
+    styleUrls: ['./people.component.scss']
   })
 
 export class PeopleComponent implements OnInit, OnDestroy{
@@ -28,13 +30,17 @@ export class PeopleComponent implements OnInit, OnDestroy{
     pieChartOptions: Highcharts.Options = {
       chart: {
         plotShadow: false,
-        type: 'pie'
+        type: 'pie',
+        margin: [0, 0, 0, 0]
       },
       title: {
-        text: "Person's Height as a Percentage of Total Height"
+        text: "Person's Height as % of Total Height"
       },
       tooltip: {
         pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+      },
+      credits: {
+        enabled: false
       },
       accessibility: {
         point: {
@@ -84,7 +90,7 @@ export class PeopleComponent implements OnInit, OnDestroy{
             y: 2.61
         }]
       }]
-      
+
     }
 
     lineColumnChartOptions: Highcharts.Options = {         
@@ -131,6 +137,9 @@ export class PeopleComponent implements OnInit, OnDestroy{
       tooltip: {
          shared: true
       },
+      credits: {
+        enabled: false
+      },
       legend: {
          layout: 'vertical',
          align: 'left',
@@ -173,6 +182,7 @@ export class PeopleComponent implements OnInit, OnDestroy{
               this.heightArray.push(personHeight);
             }        
             this.updateOptions(this.dataArray, this.nameArray, this.massArray, this.heightArray);
+            HC_exporting(Highcharts);
 
         },
           (err: any) => console.log(err)
