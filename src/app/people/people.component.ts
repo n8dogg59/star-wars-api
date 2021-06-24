@@ -10,7 +10,7 @@ import * as Highcharts from 'highcharts';
     templateUrl: './people.component.html'
   })
 
-export class PeopleComponent implements OnInit, OnDestroy{
+export class PeopleComponent implements OnInit, OnDestroy {
     dataAvailable = false;
     allPeople: People[] | undefined;
     stringJson: any;
