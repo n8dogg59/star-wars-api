@@ -123,15 +123,15 @@ export class StarshipsComponent implements OnInit, OnDestroy {
       ]
     };
 
-    getData(data) {
-          return data.map(function (country, i) {
-              return {
-                  name: country[0],
-                  y: country[1],
-                  color: countries[i].color
-              };
-          });
-        }
+    // getData(data) {
+    //       return data.map(function (country, i) {
+    //           return {
+    //               name: country[0],
+    //               y: country[1],
+    //               color: countries[i].color
+    //           };
+    //       });
+    // }
 
     countries = [{
       name: 'South Korea',
