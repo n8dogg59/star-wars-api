@@ -14,7 +14,7 @@ highcharts3D(Highcharts);
     styleUrls: ['./people.component.scss']
   })
 
-export class PeopleComponent implements OnInit, OnDestroy{
+export class PeopleComponent implements OnInit, OnDestroy {
     dataAvailable = false;
     allPeople: People[] | undefined;
     stringJson: any;
