@@ -5,6 +5,8 @@ import { Subscription } from "rxjs";
 import * as Highcharts from 'highcharts';
 import HC_exporting from 'highcharts/modules/exporting';
 import { createFalse } from "typescript";
+import highcharts3D from 'highcharts/highcharts-3d';
+highcharts3D(Highcharts);
 
 @Component({
     selector: 'sw-people',
@@ -23,6 +25,7 @@ export class PeopleComponent implements OnInit, OnDestroy{
     heightArray: any;
     massArray: any;
     chartOptions: any;
+    genderArray: any;
     sub!: Subscription;
     updateFlag = false;
     highcharts: typeof Highcharts = Highcharts;
@@ -152,11 +155,66 @@ export class PeopleComponent implements OnInit, OnDestroy{
       }
    };
 
+   pieDChartOptions: Highcharts.Options = {
+    chart: {
+      options3d: {
+          enabled: true,
+          alpha: 45,
+          beta: 0
+      }
+    },
+    title: {
+        text: 'Gender Breakdown'
+    },
+    accessibility: {
+        point: {
+            valueSuffix: '%'
+        }
+    },
+    tooltip: {
+        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+    },
+    credits: {
+      enabled: false
+    },
+    plotOptions: {
+      pie: {
+          allowPointSelect: true,
+          cursor: 'pointer',
+          depth: 35,
+          dataLabels: {
+              enabled: true,
+              format: '<b>{point.name}%</b>: {point.percentage:.1f} %'
+          }
+      }
+    },
+    series: [{
+      type: 'pie',
+      name: 'Browser share',
+      data: [
+          ['Firefox', 45.0],
+          ['IE', 26.8],
+          {
+              name: 'Chrome',
+              y: 12.8,
+              sliced: true,
+              selected: true
+          },
+          ['Safari', 8.5],
+          ['Opera', 6.2],
+          ['Others', 0.7]
+      ]
+    }]
+  };
+   
     
     constructor(private apiCallService: apiCallService) { }
   
     ngOnInit(): void {
       let totalHeight = 0;
+      let totalMale = 0;
+      let totalFemale = 0;
+      let totalRobot = 0;
       this.sub = this.apiCallService.getAllPeople().subscribe(
         (data: People[]) => {
             this.nameArray = [];
@@ -173,14 +231,28 @@ export class PeopleComponent implements OnInit, OnDestroy{
               totalHeight += peopleHeight;              
             }
             for (let i = 0; i < this.peopleArray.length; i++) {
+              if (this.peopleArray[i].gender === "male") {
+                totalMale += 1;
+                console.log(totalMale);
+              } else if (this.peopleArray[i].gender === "female") {
+                totalFemale += 1;
+                console.log(totalFemale);
+              } else {
+                totalRobot += 1;
+                console.log(totalRobot);
+              }
               let personHeight = parseInt(this.peopleArray[i].height);
+              console.log(personHeight);
               let personMass = parseInt(this.peopleArray[i].mass);
               let personName = this.peopleArray[i].name;
               this.dataArray.push({name: personName, y: personHeight});
+              console.log(this.dataArray);
               this.nameArray.push(personName);
               this.massArray.push(personMass);
               this.heightArray.push(personHeight);
+              console.log(this.heightArray);
             }        
+            this.genderArray = [["Male", totalMale], ["Female", totalFemale], ["Droid", totalRobot]]
             this.updateOptions(this.dataArray, this.nameArray, this.massArray, this.heightArray);
             HC_exporting(Highcharts);
 
@@ -225,12 +297,21 @@ export class PeopleComponent implements OnInit, OnDestroy{
                 valueSuffix: ' kg'
              }
           }
+      ];
+
+      this.pieDChartOptions.series = [
+        {
+          type: 'pie',
+          name: 'Browser share',
+          data: this.genderArray
+        }
       ]
 
       this.dataAvailable = true;
       this.chartOptions = [
         { chartConfig: this.pieChartOptions },
-        { chartConfig: this.lineColumnChartOptions }
+        { chartConfig: this.lineColumnChartOptions },
+        { chartConfig: this.pieDChartOptions}
       ]
     }    
 
