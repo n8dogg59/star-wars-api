@@ -1,99 +1,94 @@
-<!-- <div *ngIf="dataAvailable">
-    <highcharts-chart
-        style="width: 45%; display: block; margin: auto; float: left"
-        [Highcharts] = "highcharts" 
-        [options] = "chartOptions[0].chartConfig"> 
-    </highcharts-chart>
-    <highcharts-chart
-        style="width: 45%; display: block; margin: auto; float: left"
-        [Highcharts] = "highcharts" 
-        [options] = "chartOptions[1].chartConfig">
-    </highcharts-chart>
-</div> -->
-
 <br>
-
-<div>
-    <highcharts-chart
-        style="width: 100%; display: block; height: 400px;"
-        [Highcharts] = "highcharts" 
-        [options] = "chartOptions[1].chartConfig">
-    </highcharts-chart>
-</div>
-
-<br>
-
-<mat-divider></mat-divider>
-
-<br>
-
-<div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="20px" class="stats-cards">
-    <mat-card fxFlex="33">
+<!-- If statement makes sure api data loads before loading the page -->
+<div *ngIf="dataAvailable">
+    <div>
+        <!-- Displays the line/column chart for the characters height and weight that that extends the length of the page -->
         <highcharts-chart
-            style = "width: 100%; height: 300px; display: block;"
+            style="width: 100%; display: block; height: 400px;"
             [Highcharts] = "highcharts" 
-            [options] = "chartOptions[0].chartConfig">
+            [options] = "chartOptions[1].chartConfig">
         </highcharts-chart>
-    </mat-card>
-    <mat-card fxFlex="33">
-        <highcharts-chart
-            style = "width: 100%; height: 300px; display: block;"
-            [Highcharts] = "highcharts" 
-            [options] = "chartOptions[2].chartConfig">
-        </highcharts-chart>
-    </mat-card>
-    <mat-card fxFlex="33">
-        <highcharts-chart
-            style = "width: 100%; height: 300px; display: block;"
-            [Highcharts] = "highcharts" 
-            [options] = "chartOptions[0].chartConfig">
-        </highcharts-chart>
-    </mat-card>
-</div>
-
-<br>
-
-<mat-divider></mat-divider>
-
-<br>
-
-<div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="40px">
-    <div fxFlex="60">
-        <table class="table table-striped mr-3" style="height: 350px">
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Height</th>
-                    <th>Mass</th>
-                    <th>Hair Color</th>
-                    <th>Skin Color</th>
-                    <th>Eye Color</th>
-                    <th>Birth Year</th>
-                    <th>Gender</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let person of peopleArray; let i = index">
-                    <td>
-                        <a [routerLink]="['/people', i + 1 ]">    
-                        {{person.name}}</a>
-                    </td>
-                    <td>{{person.height}}</td>
-                    <td>{{person.mass}}</td>
-                    <td>{{person.hair_color}}</td>
-                    <td>{{person.skin_color}}</td>
-                    <td>{{person.eye_color}}</td>
-                    <td>{{person.birth_year}}</td>
-                    <td>{{person.gender}}</td>
-                </tr>
-            </tbody>
-        </table>
     </div>
-    <div fxFlex="40">
-        <highcharts-chart
-        style="width: 100%; display: block; height: 400px;"
-        [Highcharts] = "highcharts" 
-        [options] = "chartOptions[1].chartConfig">
-    </highcharts-chart>
+
+    <br>
+
+    <mat-divider></mat-divider>
+
+    <br>
+    <!-- Div that holds three cards that flex across the the page in the same row -->
+    <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="20px" class="stats-cards">
+        <mat-card fxFlex="33">
+            <!-- Pie chart that displays the height of each character as a percentage of total character height -->
+            <highcharts-chart
+                style = "width: 100%; height: 300px; display: block;"
+                [Highcharts] = "highcharts" 
+                [options] = "chartOptions[0].chartConfig">
+            </highcharts-chart>
+        </mat-card>
+        <mat-card fxFlex="33">
+            <!-- 3D pie chart that displays the characters sex by percentage -->
+            <highcharts-chart
+                style = "width: 100%; height: 300px; display: block;"
+                [Highcharts] = "highcharts" 
+                [options] = "chartOptions[2].chartConfig">
+            </highcharts-chart>
+        </mat-card>
+        <mat-card fxFlex="33">
+            <highcharts-chart
+                style = "width: 100%; height: 300px; display: block;"
+                [Highcharts] = "highcharts" 
+                [options] = "chartOptions[0].chartConfig">
+            </highcharts-chart>
+        </mat-card>
+    </div>
+
+    <br>
+
+    <mat-divider></mat-divider>
+
+    <br>
+    <!-- Div that displays a table and chart side by side -->
+
+    <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="40px">
+        <!-- Table takes up 60% of the width -->
+        <div fxFlex="60">
+            <table class="table table-striped mr-3" style="height: 350px">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Height</th>
+                        <th>Mass</th>
+                        <th>Hair Color</th>
+                        <th>Skin Color</th>
+                        <th>Eye Color</th>
+                        <th>Birth Year</th>
+                        <th>Gender</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let person of peopleArray; let i = index">
+                        <td>
+                            <a [routerLink]="['/people', i + 1 ]">    
+                            {{person.name}}</a>
+                        </td>
+                        <td>{{person.height}}</td>
+                        <td>{{person.mass}}</td>
+                        <td>{{person.hair_color}}</td>
+                        <td>{{person.skin_color}}</td>
+                        <td>{{person.eye_color}}</td>
+                        <td>{{person.birth_year}}</td>
+                        <td>{{person.gender}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <!-- Chart takes up 40% of the width -->
+        <div fxFlex="40">
+            <highcharts-chart
+            style="width: 100%; display: block; height: 400px;"
+            [Highcharts] = "highcharts" 
+            [options] = "chartOptions[1].chartConfig">
+        </highcharts-chart>
+        </div>
     </div>
 </div>

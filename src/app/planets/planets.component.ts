@@ -94,6 +94,9 @@ export class PlanetsComponent implements OnInit , OnDestroy {
       legend: {
         enabled: false
       },
+      credits: {
+        enabled: false
+      },
       title: {
         text: "Diameter and Orbital Period by Planet"
       },
