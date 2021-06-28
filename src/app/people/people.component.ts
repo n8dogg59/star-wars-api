@@ -4,7 +4,6 @@ import { apiCallService } from "../apicall.service";
 import { Subscription } from "rxjs";
 import * as Highcharts from 'highcharts';
 import HC_exporting from 'highcharts/modules/exporting';
-import { createFalse } from "typescript";
 import highcharts3D from 'highcharts/highcharts-3d';
 highcharts3D(Highcharts);
 
