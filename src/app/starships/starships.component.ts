@@ -246,7 +246,7 @@ years = [2016, 2012, 2008, 2004, 2000];
 years.forEach(function (year) {
     var btn = document.getElementById(year);
 
-    btn.addEventListener('click', function () {
+    btn?.addEventListener('click', function () {
 
         document.querySelectorAll('.buttons button.active').forEach(function (active) {
             active.className = '';
