@@ -4,6 +4,8 @@ import { apiCallService } from '../apicall.service';
 import { Subscription } from 'rxjs';
 import * as Highcharts from 'highcharts';
 import HC_exporting from "highcharts/highcharts-more";
+import colorAxis from "highcharts/modules/coloraxis";
+colorAxis(Highcharts);
 HC_exporting(Highcharts);
 
 interface ExtendedPointOptionsObject extends Highcharts.PointOptionsObject {
@@ -36,9 +38,6 @@ export class PlanetsComponent implements OnInit , OnDestroy {
       title: {
         text: 'Diameter of Each Planet in Star Wars Universe'
       },
-      subtitle: {
-        text: 'Source: <a href="https://swapi.dev/">swapi.dev</a>'
-      },
       xAxis: {
         categories: ['Africa', 'America', 'Asia', 'Europe', 'Oceania'],
         title: {
@@ -49,11 +48,12 @@ export class PlanetsComponent implements OnInit , OnDestroy {
         min: 0,
         title: {
             text: 'Diameter'
-        },
-        labels: {
-            overflow: 'justify'
         }
       },
+      colorAxis: {
+        maxColor: '#000fb0',
+        minColor: '#e3e5ff',
+      },      
       tooltip: {
         valueSuffix: ' miles'
       },
@@ -64,25 +64,33 @@ export class PlanetsComponent implements OnInit , OnDestroy {
             }
         }
       },
-      legend: {
-        layout: 'vertical',
-        align: 'right',
-        verticalAlign: 'top',
-        x: -40,
-        y: 80,
-        floating: true,
-        borderWidth: 1,
-        backgroundColor: '#FFFFFF',
-        shadow: true
-      },
       credits: {
         enabled: false
       },
       series: [{
         name: 'Population',
+        colorKey: 'colorValue',
         type: 'bar',
-        data: [107, 31, 635, 203, 2]
-      }]
+        data: [{
+          y: 107,
+          colorValue: 107},
+          {
+            y: 31,
+            colorValue: 31},
+          {
+            y: 635,
+            colorValue: 635},
+          {
+            y: 203,
+            colorValue: 203},
+          {
+            y: 2,
+            colorValue: 2},
+          {
+            y: 224,
+            colorValue: 224}
+      ]
+    }]
     }
 
     bubbleChartOptions: Highcharts.Options = {
@@ -208,7 +216,7 @@ export class PlanetsComponent implements OnInit , OnDestroy {
                 diameter = 20000
               }
               this.nameArray.push(this.planetsArray[i].name);
-              this.diameterArray.push(diameter);
+              this.diameterArray.push({y: diameter, colorValue: diameter});
               this.bubbleArray.push({x: diameter, y: orbital, z: population, country: planet});
             }
             this.updateOptions(this.nameArray, this.diameterArray, this.bubbleArray);
@@ -230,13 +238,13 @@ export class PlanetsComponent implements OnInit , OnDestroy {
           type: 'bar',
           data: diameter
         }
-      ]
+      ];
       this.bubbleChartOptions.series = [
         {
           type: "bubble",
           data: bubble
         }
-      ]
+      ];
       console.log(diameter);
       this.dataAvailable = true;
       console.log(this.dataAvailable);
