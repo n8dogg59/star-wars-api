@@ -332,7 +332,7 @@ export class PlanetsComponent implements OnInit , OnDestroy {
         series: {
             dataLabels: {
                 enabled: true,
-                format: '<b>{point.name}</b> ({point.y:,.0f})',
+                format: '<b>{point.name}</b> ({point.y:,.0f}%)',
                 allowOverlap: true,
                 x: 10,
                 y: 5
