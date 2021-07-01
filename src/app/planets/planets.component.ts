@@ -161,9 +161,9 @@ export class PlanetsComponent implements OnInit , OnDestroy {
         headerFormat: "<table>",
         pointFormat:
           '<tr><th colspan="2"><h3>{point.country}</h3></th></tr>' +
-          "<tr><th>Fat intake:</th><td>{point.x}g</td></tr>" +
-          "<tr><th>Sugar intake:</th><td>{point.y}g</td></tr>" +
-          "<tr><th>Obesity (adults):</th><td>{point.z}%</td></tr>",
+          "<tr><th>Planet Diameter:</th><td>{point.x} km</td></tr>" +
+          "<tr><th>Orbital Period:</th><td>{point.y} days</td></tr>" +
+          "<tr><th>Population:</th><td>{point.z:,.Of} people</td></tr>",
         footerFormat: "</table>",
         followPointer: true
       },
