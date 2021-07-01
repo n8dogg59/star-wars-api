@@ -48,6 +48,7 @@ export class PlanetsComponent implements OnInit , OnDestroy {
     bubbleArray: any;
     pyramidArray: any;
     sortedPlanetArraySW: any;
+    popArray: any;
     sub!: Subscription;
     highcharts: typeof Highcharts = Highcharts;
 
@@ -358,6 +359,55 @@ export class PlanetsComponent implements OnInit , OnDestroy {
       }]
     }
 
+    cylinderChartOptions: Highcharts.Options = {
+      chart: {
+        type: 'cylinder',
+        margin: 75,
+        options3d: {
+           enabled: true,
+           alpha: 15,
+           beta: 15,
+           depth: 50,
+           viewDistance: 25
+        }
+      },         
+      title : {
+          text: "Planet's Population"   
+      },
+      credits: {
+        enabled: false
+      },
+      xAxis: {
+        categories: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+        title: {
+            text: null
+        }
+      },
+      yAxis : { 
+        labels: {
+          format: '{value:,.0f}}',
+          style: {
+            color: '#000000'
+          },
+          
+        },
+        title: {
+          text: null
+        }
+      }, 
+      plotOptions : {
+        cylinder: {
+          depth: 25,
+          colorByPoint: true
+        }
+      },
+      series : [{
+          type: 'cylinder',
+          data: [29.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4,
+                  194.1, 95.6, 54.4]
+      }]
+    }
+
     constructor(private apiCallService: apiCallService) { }
   
     ngOnInit(): void {
@@ -370,6 +420,7 @@ export class PlanetsComponent implements OnInit , OnDestroy {
             this.bubbleArray = [];
             this.diameterArrayMulti = [];
             this.pyramidArray = [];
+            this.popArray = [];
             this.allPlanets = data;
             this.stringJson = JSON.stringify(this.allPlanets);  
             this.stringObject = JSON.parse(this.stringJson);
@@ -387,12 +438,16 @@ export class PlanetsComponent implements OnInit , OnDestroy {
               if (diameter > 20000) {
                 diameter = 20000
               }
+              if (population > 10000000000) {
+                population = population / 100
+              }
               this.nameArray.push(this.planetsArray[i].name);
               this.diameterArray.push({y: diameter, colorValue: diameter});
               this.orbitalArray.push(orbital);
               this.rotationArray.push(rotation);
               this.diameterArrayMulti.push(diameter);
               this.bubbleArray.push({x: diameter, y: orbital, z: population, country: planet});
+              this.popArray.push(population);
             }
 
             for (let i = 0; i < this.sortedPlanetArraySW.length; i++) {
@@ -403,13 +458,13 @@ export class PlanetsComponent implements OnInit , OnDestroy {
               console.log(this.pyramidArray);
             }
             
-            this.updateOptions(this.nameArray, this.diameterArray, this.bubbleArray, this.diameterArrayMulti, this.orbitalArray, this.rotationArray, this.pyramidArray);
+            this.updateOptions(this.nameArray, this.diameterArray, this.bubbleArray, this.diameterArrayMulti, this.orbitalArray, this.rotationArray, this.pyramidArray, this.popArray);
         },
           (err: any) => console.log(err)
       )
     }
 
-    updateOptions(names: any, diameter: any, bubble: any, diameterMulti: any, orbital: any, rotation: any, pyramid: any) {
+    updateOptions(names: any, diameter: any, bubble: any, diameterMulti: any, orbital: any, rotation: any, pyramid: any, population: any) {
       this.barChartOptions.xAxis = [
         {
           categories: names
@@ -481,12 +536,26 @@ export class PlanetsComponent implements OnInit , OnDestroy {
        }
       }]
 
+      this.cylinderChartOptions.series = [{
+          type: 'cylinder',
+          name: 'Population',
+          data: population
+      }]
+
+      this.cylinderChartOptions.xAxis = [{
+        categories: names,
+        title: {
+            text: null
+        }
+      }]
+
       this.dataAvailable = true;
       this.chartOptions = [
         { chartConfig: this.barChartOptions},
         { chartConfig: this.bubbleChartOptions},
         { chartConfig: this.multipleAxisChartOptions },
-        { chartConfig: this.pyramidDChartOptions}
+        { chartConfig: this.pyramidDChartOptions},
+        { chartConfig: this.cylinderChartOptions}
       ]
     }    
 
@@ -500,8 +569,6 @@ export class PlanetsComponent implements OnInit , OnDestroy {
       return comparison;
     }
     
-    
-
     ngOnDestroy() {
         this.sub.unsubscribe();
     }
