@@ -5,6 +5,15 @@ import { Subscription } from 'rxjs';
 import * as Highcharts from 'highcharts';
 import HC_exporting from "highcharts/highcharts-more";
 import colorAxis from "highcharts/modules/coloraxis";
+import highcharts3D from 'highcharts/highcharts-3d';
+highcharts3D(Highcharts);
+import cylinder from 'highcharts/modules/cylinder';
+cylinder(Highcharts);
+import funnel3d from 'highcharts/modules/funnel3d';
+funnel3d(Highcharts);
+import pyramid3d from 'highcharts/modules/pyramid3d';
+pyramid3d(Highcharts);
+
 colorAxis(Highcharts);
 HC_exporting(Highcharts);
 
@@ -26,8 +35,13 @@ export class PlanetsComponent implements OnInit , OnDestroy {
     planetsArray: any;
     nameArray: any;
     diameterArray: any;
+    orbitalArray: any;
+    rotationArray: any;
+    diameterArrayMulti: any;
     chartOptions: any;
     bubbleArray: any;
+    pyramidArray: any;
+    sortedPlanetArray: any;
     sub!: Subscription;
     highcharts: typeof Highcharts = Highcharts;
 
@@ -192,7 +206,152 @@ export class PlanetsComponent implements OnInit , OnDestroy {
         }
       ]
     };
+
+    multipleAxisChartOptions: Highcharts.Options = {
+      chart : {
+        zoomType: 'x'
+      },
+      title : {
+        text: 'Orbital Period, Rotation Period, Diameter by Planet'   
+      },   
+      subtitle : {
+        text: 'Source: <a href="https://swapi.dev/">swapi.dev</a>'
+      },
+      credits: {
+      enabled: false
+      },
+      xAxis : {
+        categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+                'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+        crosshair: true
+      },
+      yAxis : [
+        { // Primary yAxis
+           labels: {
+              format: '{value}\xB0C',
+              style: {
+                 color: '#0000FF'
+              }
+           },
+           title: {
+              text: 'Orbital Period',
+              style: {
+                 color: '#0000FF'
+              }
+           },
+           opposite: true
+        }, 
+        { // Secondary yAxis
+           title: {
+              text: 'Rotation Period',
+              style: {
+                 color: '#A52A2A'
+              }
+           },
+           labels: {
+              format: '{value} mm',
+              style: {
+                 color: '#A52A2A'
+              }
+           }
+        },
+        { // Tertiary yAxis
+           gridLineWidth: 0,
+           title: {
+              text: 'Diameter',
+              style: {
+                 color: '#2F4F4F'
+              }
+           },
+           labels: {
+              format: '{value} mb',
+              style: {
+                 color: '#2F4F4F'
+              }
+           },
+           opposite:true  
+        }
+     ],
+     tooltip: {
+        shared: true
+     },
+     legend: {
+        enabled:false
+     },
+     series : [
+        {
+           name: 'Rotation Period',
+           type: 'column',
+           yAxis: 1,
+           data: [49.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5,
+                   216.4, 194.1, 95.6, 54.4],
+           tooltip: {
+              valueSuffix: ' mm'
+           },
+           color: '#A52A2A'
+        }, 
+        {
+           name: 'Orbital Period',
+           type: 'spline',
+           yAxis: 2,
+           data: [1016, 1016, 1015.9, 1015.5, 1012.3, 1009.5, 1009.6, 1010.2,
+                    1013.1, 1016.9, 1018.2, 1016.7],
+           marker: {
+              enabled: false
+           },
+           dashStyle: 'ShortDot',
+           tooltip: {
+              valueSuffix: ' mb'
+           }
+        },
+        {
+           name: 'Diameter',
+           type: 'spline',
+           data: [7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6],
+           tooltip: {
+              valueSuffix: '\xB0C'
+           }
+        }
+     ]
+    }
     
+    pyramidDChartOptions: Highcharts.Options = {
+      chart: {
+        type: 'pyramid3d',
+        options3d: {
+            enabled: true,
+            alpha: 5,
+            depth: 55,
+            viewDistance: 50
+        }
+      },
+      title: {
+        text: 'Surface Water Breakdown'
+      },
+      plotOptions: {
+        series: {
+            dataLabels: {
+                enabled: true,
+                format: '<b>{point.name}</b> ({point.y:,.0f})',
+                allowOverlap: true,
+                x: 10,
+                y: 5
+            }
+        }
+      },
+      series: [{
+        name: 'Unique Users',
+        type: 'pyramid3d',
+        data: [
+            ['Website visits', 15654],
+            ['Downloads', 4064],
+            ['Requested price list', 1987],
+            ['Invoice sent', 976],
+            ['Finalized', 846]
+        ]
+      }]
+    }
+
     constructor(private apiCallService: apiCallService) { }
   
     ngOnInit(): void {
@@ -200,16 +359,23 @@ export class PlanetsComponent implements OnInit , OnDestroy {
         (data: Planets[]) => {
             this.nameArray = [];
             this.diameterArray = [];
+            this.rotationArray = [];
+            this.orbitalArray = [];
             this.bubbleArray = [];
+            this.diameterArrayMulti = [];
+            this.pyramidArray = [];
             this.allPlanets = data;
             this.stringJson = JSON.stringify(this.allPlanets);  
             this.stringObject = JSON.parse(this.stringJson);
             this.planetsArray = this.stringObject.results;
+            this.sortedPlanetArray = this.planetsArray;
+            this.sortedPlanetArray = this.sortedPlanetArray.sort(this.compare);
+            console.log('sorted arrary ', this.sortedPlanetArray);
             console.log('All done getting planets. ', this.planetsArray)
-            console.log('length of array is ', this.planetsArray.length);
             for (let i = 0; i < this.planetsArray.length; i++) {
               let planet = this.planetsArray[i].name;
               let orbital = parseInt(this.planetsArray[i].orbital_period);
+              let rotation = parseInt(this.planetsArray[i].rotation_period);
               let population = parseInt(this.planetsArray[i].population);
               let diameter = parseInt(this.planetsArray[i].diameter);
               if (diameter > 20000) {
@@ -217,16 +383,27 @@ export class PlanetsComponent implements OnInit , OnDestroy {
               }
               this.nameArray.push(this.planetsArray[i].name);
               this.diameterArray.push({y: diameter, colorValue: diameter});
+              this.orbitalArray.push(orbital);
+              this.rotationArray.push(rotation);
+              this.diameterArrayMulti.push(diameter);
               this.bubbleArray.push({x: diameter, y: orbital, z: population, country: planet});
             }
-            this.updateOptions(this.nameArray, this.diameterArray, this.bubbleArray);
+
+            for (let i = 0; i < this.sortedPlanetArray.length; i++) {
+              let sortedSurfaceWater = parseInt(this.sortedPlanetArray[i].surface_water);
+              if (Number.isFinite(sortedSurfaceWater)) {
+                this.pyramidArray.push([this.sortedPlanetArray[i].name, sortedSurfaceWater]);
+              }
+              console.log(this.pyramidArray);
+            }
+            
+            this.updateOptions(this.nameArray, this.diameterArray, this.bubbleArray, this.diameterArrayMulti, this.orbitalArray, this.rotationArray, this.pyramidArray);
         },
           (err: any) => console.log(err)
       )
     }
 
-    updateOptions(names: any, diameter: any, bubble: any) {
-      console.log(names);
+    updateOptions(names: any, diameter: any, bubble: any, diameterMulti: any, orbital: any, rotation: any, pyramid: any) {
       this.barChartOptions.xAxis = [
         {
           categories: names
@@ -245,14 +422,77 @@ export class PlanetsComponent implements OnInit , OnDestroy {
           data: bubble
         }
       ];
-      console.log(diameter);
+
+      this.multipleAxisChartOptions.xAxis = [
+        {
+          categories: names,
+          crosshair: true
+        }
+      ]
+      this.multipleAxisChartOptions.series = [
+        {
+          name: 'Rotation Period',
+          type: 'column',
+          yAxis: 1,
+          data: rotation,
+          tooltip: {
+             valueSuffix: ' days'
+          },
+          color: '#A52A2A'
+
+       }, 
+       {
+          name: 'Orbital Period',
+          type: 'spline',
+          yAxis: 2,
+          data: orbital,
+          marker: {
+             enabled: false
+          },
+          dashStyle: 'ShortDot',
+          tooltip: {
+             valueSuffix: ' days'
+          },
+          color: '#0000FF'
+       },
+       {
+          name: 'Diameter',
+          type: 'spline',
+          data: diameterMulti,
+          tooltip: {
+             valueSuffix: ' km'
+          },
+          color: '#2F4F4F'
+       }
+      ]
+
+      this.pyramidDChartOptions.series = [{
+        name: 'Surface Water',
+        type: 'pyramid3d',
+        data: pyramid,
+        tooltip: {
+          valueSuffix: '%'
+       }
+      }]
+
       this.dataAvailable = true;
-      console.log(this.dataAvailable);
       this.chartOptions = [
         { chartConfig: this.barChartOptions},
-        { chartConfig: this.bubbleChartOptions}
+        { chartConfig: this.bubbleChartOptions},
+        { chartConfig: this.multipleAxisChartOptions },
+        { chartConfig: this.pyramidDChartOptions}
       ]
     }    
+
+    compare(a: any, b: any) {
+      let comparison = 0;
+      if (parseInt(a.surface_water) > parseInt(b.surface_water)) {
+        comparison = -1
+      } else if (parseInt(a.surface_water) < parseInt(b.surface_water)) {
+        comparison = 1;
+      }
+      return comparison;
+    }
 
     ngOnDestroy() {
         this.sub.unsubscribe();

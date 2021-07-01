@@ -281,24 +281,18 @@ export class PeopleComponent implements OnInit, OnDestroy {
             for (let i = 0; i < this.peopleArray.length; i++) {
               if (this.peopleArray[i].gender === "male") {
                 totalMale += 1;
-                console.log(totalMale);
               } else if (this.peopleArray[i].gender === "female") {
                 totalFemale += 1;
-                console.log(totalFemale);
               } else {
                 totalRobot += 1;
-                console.log(totalRobot);
               }
               let personHeight = parseInt(this.peopleArray[i].height);
-              console.log(personHeight);
               let personMass = parseInt(this.peopleArray[i].mass);
               let personName = this.peopleArray[i].name;
               this.dataArray.push({name: personName, y: personHeight});
-              console.log(this.dataArray);
               this.nameArray.push(personName);
               this.massArray.push(personMass);
               this.heightArray.push(personHeight);
-              console.log(this.heightArray);
             }        
             this.genderArray = [["Male", totalMale], ["Female", totalFemale], ["Droid", totalRobot]]
             this.updateOptions(this.dataArray, this.nameArray, this.massArray, this.heightArray);
