@@ -21,6 +21,12 @@ interface ExtendedPointOptionsObject extends Highcharts.PointOptionsObject {
   country: string;
 }
 
+Highcharts.setOptions({
+  lang: {
+    thousandsSep: ","
+  }
+});
+
 @Component({
   selector: 'sw-planets',
   templateUrl: './planets.component.html'
@@ -163,7 +169,7 @@ export class PlanetsComponent implements OnInit , OnDestroy {
           '<tr><th colspan="2"><h3>{point.country}</h3></th></tr>' +
           "<tr><th>Planet Diameter:</th><td>{point.x} km</td></tr>" +
           "<tr><th>Orbital Period:</th><td>{point.y} days</td></tr>" +
-          "<tr><th>Population:</th><td>{point.z:,.Of} people</td></tr>",
+          "<tr><th>Population:</th><td>{point.z} people</td></tr>",
         footerFormat: "</table>",
         followPointer: true
       },
