@@ -1,0 +1,62 @@
+Date : 2021-07-01 11:32:32
+Directory : c:\Users\Austin Schroeders\Desktop\FusionAlliance\starWarsAPI\src\app
+Total : 31 files,  1648 codes, 13 comments, 162 blanks, all 1823 lines
+
+Languages
++------------+------------+------------+------------+------------+------------+
+| language   | files      | code       | comment    | blank      | total      |
++------------+------------+------------+------------+------------+------------+
+| TypeScript |         19 |      1,319 |          5 |        136 |      1,460 |
+| HTML       |          7 |        286 |          8 |         18 |        312 |
+| CSS        |          4 |         38 |          0 |          8 |         46 |
+| SCSS       |          1 |          5 |          0 |          0 |          5 |
++------------+------------+------------+------------+------------+------------+
+
+Directories
++---------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                                          | files      | code       | comment    | blank      | total      |
++---------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                                             |         31 |      1,648 |         13 |        162 |      1,823 |
+| home                                                                                                          |          2 |         21 |          0 |          3 |         24 |
+| people                                                                                                        |          5 |        606 |          8 |         45 |        659 |
+| planets                                                                                                       |          8 |        689 |          0 |         56 |        745 |
+| starships                                                                                                     |          4 |         88 |          0 |         19 |        107 |
++---------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++---------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| filename                                                                                                      | language   | code       | comment    | blank      | total      |
++---------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| c:\Users\Austin Schroeders\Desktop\FusionAlliance\starWarsAPI\src\app\apicall.service.spec.ts                 | TypeScript |         12 |          0 |          5 |         17 |
+| c:\Users\Austin Schroeders\Desktop\FusionAlliance\starWarsAPI\src\app\apicall.service.ts                      | TypeScript |         55 |          5 |         14 |         74 |
+| c:\Users\Austin Schroeders\Desktop\FusionAlliance\starWarsAPI\src\app\app-routing.module.ts                   | TypeScript |         23 |          0 |          3 |         26 |
+| c:\Users\Austin Schroeders\Desktop\FusionAlliance\starWarsAPI\src\app\app.component.css                       | CSS        |          0 |          0 |          1 |          1 |
+| c:\Users\Austin Schroeders\Desktop\FusionAlliance\starWarsAPI\src\app\app.component.html                      | HTML       |         12 |          0 |          1 |         13 |
+| c:\Users\Austin Schroeders\Desktop\FusionAlliance\starWarsAPI\src\app\app.component.spec.ts                   | TypeScript |         31 |          0 |          5 |         36 |
+| c:\Users\Austin Schroeders\Desktop\FusionAlliance\starWarsAPI\src\app\app.component.ts                        | TypeScript |          9 |          0 |          4 |         13 |
+| c:\Users\Austin Schroeders\Desktop\FusionAlliance\starWarsAPI\src\app\app.module.ts                           | TypeScript |         46 |          0 |          3 |         49 |
+| c:\Users\Austin Schroeders\Desktop\FusionAlliance\starWarsAPI\src\app\home\home.component.html                | HTML       |         14 |          0 |          1 |         15 |
+| c:\Users\Austin Schroeders\Desktop\FusionAlliance\starWarsAPI\src\app\home\home.component.ts                  | TypeScript |          7 |          0 |          2 |          9 |
+| c:\Users\Austin Schroeders\Desktop\FusionAlliance\starWarsAPI\src\app\people.spec.ts                          | TypeScript |          6 |          0 |          2 |          8 |
+| c:\Users\Austin Schroeders\Desktop\FusionAlliance\starWarsAPI\src\app\people.ts                               | TypeScript |         18 |          0 |          1 |         19 |
+| c:\Users\Austin Schroeders\Desktop\FusionAlliance\starWarsAPI\src\app\people\people.component.html            | HTML       |         79 |          8 |          8 |         95 |
+| c:\Users\Austin Schroeders\Desktop\FusionAlliance\starWarsAPI\src\app\people\people.component.scss            | SCSS       |          5 |          0 |          0 |          5 |
+| c:\Users\Austin Schroeders\Desktop\FusionAlliance\starWarsAPI\src\app\people\people.component.ts              | TypeScript |        457 |          0 |         29 |        486 |
+| c:\Users\Austin Schroeders\Desktop\FusionAlliance\starWarsAPI\src\app\people\person-detail.component.html     | HTML       |         40 |          0 |          2 |         42 |
+| c:\Users\Austin Schroeders\Desktop\FusionAlliance\starWarsAPI\src\app\people\person-detail.component.ts       | TypeScript |         25 |          0 |          6 |         31 |
+| c:\Users\Austin Schroeders\Desktop\FusionAlliance\starWarsAPI\src\app\planets.ts                              | TypeScript |         14 |          0 |          0 |         14 |
+| c:\Users\Austin Schroeders\Desktop\FusionAlliance\starWarsAPI\src\app\planets\planet-detail.component.css     | CSS        |          0 |          0 |          1 |          1 |
+| c:\Users\Austin Schroeders\Desktop\FusionAlliance\starWarsAPI\src\app\planets\planet-detail.component.html    | HTML       |         48 |          0 |          2 |         50 |
+| c:\Users\Austin Schroeders\Desktop\FusionAlliance\starWarsAPI\src\app\planets\planet-detail.component.spec.ts | TypeScript |         20 |          0 |          6 |         26 |
+| c:\Users\Austin Schroeders\Desktop\FusionAlliance\starWarsAPI\src\app\planets\planet-detail.component.ts      | TypeScript |         25 |          0 |          6 |         31 |
+| c:\Users\Austin Schroeders\Desktop\FusionAlliance\starWarsAPI\src\app\planets\planets.component.css           | CSS        |         38 |          0 |          5 |         43 |
+| c:\Users\Austin Schroeders\Desktop\FusionAlliance\starWarsAPI\src\app\planets\planets.component.html          | HTML       |         57 |          0 |          3 |         60 |
+| c:\Users\Austin Schroeders\Desktop\FusionAlliance\starWarsAPI\src\app\planets\planets.component.spec.ts       | TypeScript |         20 |          0 |          6 |         26 |
+| c:\Users\Austin Schroeders\Desktop\FusionAlliance\starWarsAPI\src\app\planets\planets.component.ts            | TypeScript |        481 |          0 |         27 |        508 |
+| c:\Users\Austin Schroeders\Desktop\FusionAlliance\starWarsAPI\src\app\starships.ts                            | TypeScript |         18 |          0 |          0 |         18 |
+| c:\Users\Austin Schroeders\Desktop\FusionAlliance\starWarsAPI\src\app\starships\starships.component.css       | CSS        |          0 |          0 |          1 |          1 |
+| c:\Users\Austin Schroeders\Desktop\FusionAlliance\starWarsAPI\src\app\starships\starships.component.html      | HTML       |         36 |          0 |          1 |         37 |
+| c:\Users\Austin Schroeders\Desktop\FusionAlliance\starWarsAPI\src\app\starships\starships.component.spec.ts   | TypeScript |         20 |          0 |          6 |         26 |
+| c:\Users\Austin Schroeders\Desktop\FusionAlliance\starWarsAPI\src\app\starships\starships.component.ts        | TypeScript |         32 |          0 |         11 |         43 |
+| Total                                                                                                         |            |      1,648 |         13 |        162 |      1,823 |
++---------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+

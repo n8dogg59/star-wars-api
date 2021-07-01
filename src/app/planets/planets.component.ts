@@ -47,7 +47,7 @@ export class PlanetsComponent implements OnInit , OnDestroy {
     chartOptions: any;
     bubbleArray: any;
     pyramidArray: any;
-    sortedPlanetArray: any;
+    sortedPlanetArraySW: any;
     sub!: Subscription;
     highcharts: typeof Highcharts = Highcharts;
 
@@ -374,9 +374,9 @@ export class PlanetsComponent implements OnInit , OnDestroy {
             this.stringJson = JSON.stringify(this.allPlanets);  
             this.stringObject = JSON.parse(this.stringJson);
             this.planetsArray = this.stringObject.results;
-            this.sortedPlanetArray = this.planetsArray;
-            this.sortedPlanetArray = this.sortedPlanetArray.sort(this.compare);
-            console.log('sorted arrary ', this.sortedPlanetArray);
+            this.sortedPlanetArraySW = this.planetsArray;
+            this.sortedPlanetArraySW = this.sortedPlanetArraySW.sort(this.compareSW);
+            console.log('sorted arrary ', this.sortedPlanetArraySW);
             console.log('All done getting planets. ', this.planetsArray)
             for (let i = 0; i < this.planetsArray.length; i++) {
               let planet = this.planetsArray[i].name;
@@ -395,10 +395,10 @@ export class PlanetsComponent implements OnInit , OnDestroy {
               this.bubbleArray.push({x: diameter, y: orbital, z: population, country: planet});
             }
 
-            for (let i = 0; i < this.sortedPlanetArray.length; i++) {
-              let sortedSurfaceWater = parseInt(this.sortedPlanetArray[i].surface_water);
+            for (let i = 0; i < this.sortedPlanetArraySW.length; i++) {
+              let sortedSurfaceWater = parseInt(this.sortedPlanetArraySW[i].surface_water);
               if (Number.isFinite(sortedSurfaceWater)) {
-                this.pyramidArray.push([this.sortedPlanetArray[i].name, sortedSurfaceWater]);
+                this.pyramidArray.push([this.sortedPlanetArraySW[i].name, sortedSurfaceWater]);
               }
               console.log(this.pyramidArray);
             }
@@ -490,7 +490,7 @@ export class PlanetsComponent implements OnInit , OnDestroy {
       ]
     }    
 
-    compare(a: any, b: any) {
+    compareSW(a: any, b: any) {
       let comparison = 0;
       if (parseInt(a.surface_water) > parseInt(b.surface_water)) {
         comparison = -1
@@ -499,10 +499,10 @@ export class PlanetsComponent implements OnInit , OnDestroy {
       }
       return comparison;
     }
+    
+    
 
     ngOnDestroy() {
         this.sub.unsubscribe();
     }
-
-
 }

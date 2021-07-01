@@ -1,0 +1,33 @@
+"filename", "language", "TypeScript", "HTML", "CSS", "SCSS", "comment", "blank", "total"
+"c:\Users\Austin Schroeders\Desktop\FusionAlliance\starWarsAPI\src\app\apicall.service.spec.ts", "TypeScript", 12, 0, 0, 0, 0, 5, 17
+"c:\Users\Austin Schroeders\Desktop\FusionAlliance\starWarsAPI\src\app\apicall.service.ts", "TypeScript", 55, 0, 0, 0, 5, 14, 74
+"c:\Users\Austin Schroeders\Desktop\FusionAlliance\starWarsAPI\src\app\app-routing.module.ts", "TypeScript", 23, 0, 0, 0, 0, 3, 26
+"c:\Users\Austin Schroeders\Desktop\FusionAlliance\starWarsAPI\src\app\app.component.css", "CSS", 0, 0, 0, 0, 0, 1, 1
+"c:\Users\Austin Schroeders\Desktop\FusionAlliance\starWarsAPI\src\app\app.component.html", "HTML", 0, 12, 0, 0, 0, 1, 13
+"c:\Users\Austin Schroeders\Desktop\FusionAlliance\starWarsAPI\src\app\app.component.spec.ts", "TypeScript", 31, 0, 0, 0, 0, 5, 36
+"c:\Users\Austin Schroeders\Desktop\FusionAlliance\starWarsAPI\src\app\app.component.ts", "TypeScript", 9, 0, 0, 0, 0, 4, 13
+"c:\Users\Austin Schroeders\Desktop\FusionAlliance\starWarsAPI\src\app\app.module.ts", "TypeScript", 46, 0, 0, 0, 0, 3, 49
+"c:\Users\Austin Schroeders\Desktop\FusionAlliance\starWarsAPI\src\app\home\home.component.html", "HTML", 0, 14, 0, 0, 0, 1, 15
+"c:\Users\Austin Schroeders\Desktop\FusionAlliance\starWarsAPI\src\app\home\home.component.ts", "TypeScript", 7, 0, 0, 0, 0, 2, 9
+"c:\Users\Austin Schroeders\Desktop\FusionAlliance\starWarsAPI\src\app\people.spec.ts", "TypeScript", 6, 0, 0, 0, 0, 2, 8
+"c:\Users\Austin Schroeders\Desktop\FusionAlliance\starWarsAPI\src\app\people.ts", "TypeScript", 18, 0, 0, 0, 0, 1, 19
+"c:\Users\Austin Schroeders\Desktop\FusionAlliance\starWarsAPI\src\app\people\people.component.html", "HTML", 0, 79, 0, 0, 8, 8, 95
+"c:\Users\Austin Schroeders\Desktop\FusionAlliance\starWarsAPI\src\app\people\people.component.scss", "SCSS", 0, 0, 0, 5, 0, 0, 5
+"c:\Users\Austin Schroeders\Desktop\FusionAlliance\starWarsAPI\src\app\people\people.component.ts", "TypeScript", 457, 0, 0, 0, 0, 29, 486
+"c:\Users\Austin Schroeders\Desktop\FusionAlliance\starWarsAPI\src\app\people\person-detail.component.html", "HTML", 0, 40, 0, 0, 0, 2, 42
+"c:\Users\Austin Schroeders\Desktop\FusionAlliance\starWarsAPI\src\app\people\person-detail.component.ts", "TypeScript", 25, 0, 0, 0, 0, 6, 31
+"c:\Users\Austin Schroeders\Desktop\FusionAlliance\starWarsAPI\src\app\planets.ts", "TypeScript", 14, 0, 0, 0, 0, 0, 14
+"c:\Users\Austin Schroeders\Desktop\FusionAlliance\starWarsAPI\src\app\planets\planet-detail.component.css", "CSS", 0, 0, 0, 0, 0, 1, 1
+"c:\Users\Austin Schroeders\Desktop\FusionAlliance\starWarsAPI\src\app\planets\planet-detail.component.html", "HTML", 0, 48, 0, 0, 0, 2, 50
+"c:\Users\Austin Schroeders\Desktop\FusionAlliance\starWarsAPI\src\app\planets\planet-detail.component.spec.ts", "TypeScript", 20, 0, 0, 0, 0, 6, 26
+"c:\Users\Austin Schroeders\Desktop\FusionAlliance\starWarsAPI\src\app\planets\planet-detail.component.ts", "TypeScript", 25, 0, 0, 0, 0, 6, 31
+"c:\Users\Austin Schroeders\Desktop\FusionAlliance\starWarsAPI\src\app\planets\planets.component.css", "CSS", 0, 0, 38, 0, 0, 5, 43
+"c:\Users\Austin Schroeders\Desktop\FusionAlliance\starWarsAPI\src\app\planets\planets.component.html", "HTML", 0, 57, 0, 0, 0, 3, 60
+"c:\Users\Austin Schroeders\Desktop\FusionAlliance\starWarsAPI\src\app\planets\planets.component.spec.ts", "TypeScript", 20, 0, 0, 0, 0, 6, 26
+"c:\Users\Austin Schroeders\Desktop\FusionAlliance\starWarsAPI\src\app\planets\planets.component.ts", "TypeScript", 481, 0, 0, 0, 0, 27, 508
+"c:\Users\Austin Schroeders\Desktop\FusionAlliance\starWarsAPI\src\app\starships.ts", "TypeScript", 18, 0, 0, 0, 0, 0, 18
+"c:\Users\Austin Schroeders\Desktop\FusionAlliance\starWarsAPI\src\app\starships\starships.component.css", "CSS", 0, 0, 0, 0, 0, 1, 1
+"c:\Users\Austin Schroeders\Desktop\FusionAlliance\starWarsAPI\src\app\starships\starships.component.html", "HTML", 0, 36, 0, 0, 0, 1, 37
+"c:\Users\Austin Schroeders\Desktop\FusionAlliance\starWarsAPI\src\app\starships\starships.component.spec.ts", "TypeScript", 20, 0, 0, 0, 0, 6, 26
+"c:\Users\Austin Schroeders\Desktop\FusionAlliance\starWarsAPI\src\app\starships\starships.component.ts", "TypeScript", 32, 0, 0, 0, 0, 11, 43
+"Total", "-", 1319, 286, 38, 5, 13, 162, 1823

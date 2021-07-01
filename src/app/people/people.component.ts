@@ -25,6 +25,8 @@ export class PeopleComponent implements OnInit, OnDestroy {
     massArray: any;
     chartOptions: any;
     genderArray: any;
+    sortedPeopleArrayEC: any;
+    eyeColorArray: any;
     sub!: Subscription;
     updateFlag = false;
     highcharts: typeof Highcharts = Highcharts;
@@ -255,6 +257,44 @@ export class PeopleComponent implements OnInit, OnDestroy {
                 194.1, 95.6, 54.4]
     }]
   }
+
+  donutChartOptions: Highcharts.Options = {
+    chart : {
+      plotShadow: false
+    },
+    title : {
+        text: 'Eye Color Breakdown'   
+    },
+    tooltip : {
+        pointFormat: '{point.percentage:.1f}%</b>'
+    },
+    plotOptions : {
+        pie: {
+          shadow: true,
+          center: ['50%', '50%'],
+          size:'45%',
+          innerSize: '40%'            
+        }
+    },
+    series : [{
+        type: 'pie',
+        name: 'Browser share',
+        data: [
+          ['Firefox',   45.0],
+          ['IE',       26.8],
+          {
+              name: 'Chrome',
+              y: 12.8,
+              sliced: true,
+              selected: true
+          },
+          ['Safari',    8.5],
+          ['Opera',     6.2],
+          ['Others',      0.7]
+        ]
+    }]
+    }
+
     
     constructor(private apiCallService: apiCallService) { }
   
@@ -269,10 +309,15 @@ export class PeopleComponent implements OnInit, OnDestroy {
             this.dataArray = [];
             this.heightArray = [];
             this.massArray = [];
+            this.eyeColorArray = [];
             this.allPeople = data;
             this.stringJson = JSON.stringify(this.allPeople);  
             this.stringObject = JSON.parse(this.stringJson);
             this.peopleArray = this.stringObject.results;
+            this.sortedPeopleArrayEC = this.peopleArray;
+            this.sortedPeopleArrayEC = this.sortedPeopleArrayEC.sort(this.compareEC);
+            this.eyeColorArray = this.calculateEC(this.sortedPeopleArrayEC);
+            console.log(this.eyeColorArray);
             console.log('All done getting people. ', this.peopleArray)
             for (let i = 0; i < this.peopleArray.length; i++) {
               let peopleHeight = parseInt(this.peopleArray[i].height);
@@ -295,7 +340,7 @@ export class PeopleComponent implements OnInit, OnDestroy {
               this.heightArray.push(personHeight);
             }        
             this.genderArray = [["Male", totalMale], ["Female", totalFemale], ["Droid", totalRobot]]
-            this.updateOptions(this.dataArray, this.nameArray, this.massArray, this.heightArray);
+            this.updateOptions(this.dataArray, this.nameArray, this.massArray, this.heightArray, this.eyeColorArray);
             HC_exporting(Highcharts);
 
         },
@@ -303,7 +348,7 @@ export class PeopleComponent implements OnInit, OnDestroy {
       )
     }
 
-    updateOptions(dataArray: any, nameArray: any, massArray: any, heightArray:any) {
+    updateOptions(dataArray: any, nameArray: any, massArray: any, heightArray: any, eyeColorArray: any) {
       this.pieChartOptions.series = [
         {
           name: 'Heights',
@@ -344,7 +389,6 @@ export class PeopleComponent implements OnInit, OnDestroy {
       this.pieDChartOptions.series = [
         {
           type: 'pie',
-          name: 'Browser share',
           data: this.genderArray
         }
       ];
@@ -366,14 +410,73 @@ export class PeopleComponent implements OnInit, OnDestroy {
         categories: nameArray
       }
 
+      this.donutChartOptions.series = [{
+        type: 'pie',
+        name: '% With Eye Color',
+        keys: ['name', 'y', 'color'],
+        data: eyeColorArray
+      }]
+
       this.dataAvailable = true;
       this.chartOptions = [
         { chartConfig: this.pieChartOptions },
         { chartConfig: this.lineColumnChartOptions },
         { chartConfig: this.pieDChartOptions},
-        { chartConfig: this.columnDChartOptions}
+        { chartConfig: this.columnDChartOptions},
+        { chartConfig: this.donutChartOptions }
       ]
     }    
+
+    compareEC(a: any, b: any) {
+      let comparison = 0;
+      if (a.eye_color > b.eye_color) {
+        comparison = -1
+      } else if (a.eye_color < b.eye_color) {
+        comparison = 1;
+      }
+      return comparison;
+    }
+
+    calculateEC(peopleArr: any) {
+      let eyeArray = [];  
+      let total = 0;
+      let inst = 0;
+
+      
+      for (let i = 0; i < peopleArr.length; i++) {
+        let name = peopleArr[i].name;
+        let eyeColor = peopleArr[i].eye_color;
+        eyeArray.push({name, eyeColor, total})
+      }
+      console.log(eyeArray);
+      var finalEC = [], prev;
+      
+      for ( var i = 0; i < eyeArray.length; i++ ) {
+        if ( eyeArray[i].eyeColor !== prev ) {
+            if (eyeArray[i].eyeColor === 'blue-gray') {
+              eyeArray[i].eyeColor = 'steelblue'
+            }
+            finalEC.push([eyeArray[i].eyeColor, eyeArray[i].total, eyeArray[i].eyeColor]);
+            console.log(finalEC[inst][1]);
+            let total = finalEC[inst][1]
+            total += 1;
+            console.log(total)
+            finalEC[inst][1] = total;
+            console.log(finalEC[inst][1]);
+            inst += 1;
+        } else {
+            console.log(finalEC[i-1]);
+            total = finalEC[inst-1][1];
+            total+= 1;
+            finalEC[inst-1][1] = total;
+            console.log(finalEC[inst-1])
+        }
+        prev = eyeArray[i].eyeColor;
+        console.log(prev);
+      }
+      console.log(finalEC);
+      return finalEC;
+    }
 
     ngOnDestroy() {
         this.sub.unsubscribe();
