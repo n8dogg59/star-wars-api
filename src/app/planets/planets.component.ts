@@ -365,8 +365,8 @@ export class PlanetsComponent implements OnInit , OnDestroy {
         margin: 75,
         options3d: {
            enabled: true,
-           alpha: 15,
-           beta: 15,
+           alpha: 8,
+           beta: 8,
            depth: 50,
            viewDistance: 25
         }
@@ -385,7 +385,7 @@ export class PlanetsComponent implements OnInit , OnDestroy {
       },
       yAxis : { 
         labels: {
-          format: '{value:,.0f}}',
+          format: '{value:,.0f}',
           style: {
             color: '#000000'
           },
