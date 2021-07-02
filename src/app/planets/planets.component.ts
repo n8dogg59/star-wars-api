@@ -335,6 +335,9 @@ export class PlanetsComponent implements OnInit , OnDestroy {
       title: {
         text: 'Surface Water Breakdown'
       },
+      credits: {
+        enabled: false
+      },
       plotOptions: {
         series: {
             dataLabels: {
