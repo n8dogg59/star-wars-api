@@ -273,7 +273,11 @@ export class PeopleComponent implements OnInit, OnDestroy {
           shadow: true,
           center: ['50%', '50%'],
           size:'45%',
-          innerSize: '40%'            
+          innerSize: '40%',
+          dataLabels: {
+            enabled: true,
+            format: '{point.percentage:.1f} %'
+        }     
         }
     },
     series : [{
@@ -295,7 +299,6 @@ export class PeopleComponent implements OnInit, OnDestroy {
     }]
     }
 
-    
     constructor(private apiCallService: apiCallService) { }
   
     ngOnInit(): void {
