@@ -15,7 +15,6 @@ import pyramid3d from 'highcharts/modules/pyramid3d';
 pyramid3d(Highcharts);
 
 colorAxis(Highcharts);
-HC_exporting(Highcharts);
 
 interface ExtendedPointOptionsObject extends Highcharts.PointOptionsObject {
   country: string;
@@ -49,6 +48,8 @@ export class PlanetsComponent implements OnInit , OnDestroy {
     pyramidArray: any;
     sortedPlanetArraySW: any;
     popArray: any;
+    sortedPlanetsArrayClimate: any;
+    climateArray: any;
     sub!: Subscription;
     highcharts: typeof Highcharts = Highcharts;
 
@@ -76,6 +77,7 @@ export class PlanetsComponent implements OnInit , OnDestroy {
         minColor: '#e3e5ff',
       },      
       tooltip: {
+        shared: true,
         valueSuffix: ' miles'
       },
       plotOptions: {
@@ -366,6 +368,7 @@ export class PlanetsComponent implements OnInit , OnDestroy {
       chart: {
         type: 'cylinder',
         margin: 75,
+        marginLeft: 100,
         options3d: {
            enabled: true,
            alpha: 8,
@@ -411,6 +414,64 @@ export class PlanetsComponent implements OnInit , OnDestroy {
       }]
     }
 
+    pieSemiChartOptions: Highcharts.Options = {
+      chart : {
+        plotBorderWidth: 0,
+        plotShadow: false
+      },
+      title : {
+          text: 'Climate Breakdown by Planet',
+      },
+      credits: {
+        enabled: false
+      },
+      tooltip : {
+        shared: true,
+        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+      },
+      accessibility: {
+        point: {
+            valueSuffix: '%'
+        }
+      },
+      plotOptions : {
+        pie: {
+          dataLabels: {
+              enabled: true,
+              distance: -50,
+              style: {
+                  fontWeight: 'bold',
+                  color: 'white',
+                  fontSize: '100%'
+              }
+          },
+          startAngle: -90,
+          endAngle: 90,
+          center: ['50%', '75%'],
+          size: '110%'
+      }
+      },
+      series : [{
+          type: 'pie',
+          name: 'Browser share',
+          innerSize: '50%',
+          data: [
+            ['Chrome', 58.9],
+            ['Firefox', 13.29],
+            ['Internet Explorer', 13],
+            ['Edge', 3.78],
+            ['Safari', 3.42],
+            {
+                name: 'Other',
+                y: 7.61,
+                dataLabels: {
+                    enabled: false
+                }
+            }
+          ]
+      }]
+    }
+
     constructor(private apiCallService: apiCallService) { }
   
     ngOnInit(): void {
@@ -424,12 +485,20 @@ export class PlanetsComponent implements OnInit , OnDestroy {
             this.diameterArrayMulti = [];
             this.pyramidArray = [];
             this.popArray = [];
+            this.climateArray = [];
             this.allPlanets = data;
             this.stringJson = JSON.stringify(this.allPlanets);  
             this.stringObject = JSON.parse(this.stringJson);
             this.planetsArray = this.stringObject.results;
             this.sortedPlanetArraySW = this.planetsArray;
+            this.sortedPlanetsArrayClimate = this.planetsArray;
+            console.log(this.sortedPlanetsArrayClimate);
             this.sortedPlanetArraySW = this.sortedPlanetArraySW.sort(this.compareSW);
+            console.log(this.sortedPlanetArraySW)
+            this.sortedPlanetsArrayClimate = this.sortedPlanetsArrayClimate.sort(this.compareClimate);
+            this.climateArray = this.calculateClimate(this.sortedPlanetsArrayClimate);
+            console.log(this.climateArray);
+            console.log('Climate sorted array ', this.sortedPlanetsArrayClimate);
             console.log('sorted arrary ', this.sortedPlanetArraySW);
             console.log('All done getting planets. ', this.planetsArray)
             for (let i = 0; i < this.planetsArray.length; i++) {
@@ -461,13 +530,15 @@ export class PlanetsComponent implements OnInit , OnDestroy {
               console.log(this.pyramidArray);
             }
             
-            this.updateOptions(this.nameArray, this.diameterArray, this.bubbleArray, this.diameterArrayMulti, this.orbitalArray, this.rotationArray, this.pyramidArray, this.popArray);
+            this.updateOptions(this.nameArray, this.diameterArray, this.bubbleArray, this.diameterArrayMulti, this.orbitalArray, this.rotationArray, this.pyramidArray, this.popArray, this.climateArray);
+            HC_exporting(Highcharts);
+
         },
           (err: any) => console.log(err)
       )
     }
 
-    updateOptions(names: any, diameter: any, bubble: any, diameterMulti: any, orbital: any, rotation: any, pyramid: any, population: any) {
+    updateOptions(names: any, diameter: any, bubble: any, diameterMulti: any, orbital: any, rotation: any, pyramid: any, population: any, climate: any) {
       this.barChartOptions.xAxis = [
         {
           categories: names
@@ -552,13 +623,21 @@ export class PlanetsComponent implements OnInit , OnDestroy {
         }
       }]
 
+      this.pieSemiChartOptions.series = [{
+        type: 'pie',
+          name: 'Climate',
+          innerSize: '50%',
+          data: climate
+      }]
+
       this.dataAvailable = true;
       this.chartOptions = [
         { chartConfig: this.barChartOptions},
         { chartConfig: this.bubbleChartOptions},
         { chartConfig: this.multipleAxisChartOptions },
         { chartConfig: this.pyramidDChartOptions},
-        { chartConfig: this.cylinderChartOptions}
+        { chartConfig: this.cylinderChartOptions},
+        { chartConfig: this.pieSemiChartOptions}
       ]
     }    
 
@@ -571,7 +650,57 @@ export class PlanetsComponent implements OnInit , OnDestroy {
       }
       return comparison;
     }
+
+    compareClimate(a: any, b: any) {
+      let comparison = 0;
+      var climateA = a.climate.toUpperCase();
+      var climateB = b.climate.toUpperCase();
+      if (climateA < climateB) {
+        comparison = -1
+      } else if (climateA > climateB) {
+        comparison = 1;
+      }
+      return comparison;
+    }
     
+    calculateClimate(climateArr: any) {
+      let climateArray = [];  
+      let total = 0;
+      let inst = 0;
+
+      
+      for (let i = 0; i < climateArr.length; i++) {
+        let name = climateArr[i].name;
+        let climate = climateArr[i].climate;
+        climateArray.push({name, climate, total})
+      }
+      console.log(climateArray);
+      var finalClimate = [], prev;
+      
+      for ( var i = 0; i < climateArray.length; i++ ) {
+        if ( climateArray[i].climate !== prev ) {
+            finalClimate.push([climateArray[i].climate, climateArray[i].total]);
+            console.log(finalClimate[inst][1]);
+            let total = finalClimate[inst][1]
+            total += 1;
+            console.log(total)
+            finalClimate[inst][1] = total;
+            console.log(finalClimate[inst][1]);
+            inst += 1;
+        } else {
+            console.log(finalClimate[i-1]);
+            total = finalClimate[inst-1][1];
+            total+= 1;
+            finalClimate[inst-1][1] = total;
+            console.log(finalClimate[inst-1])
+        }
+        prev = climateArray[i].climate;
+        console.log(prev);
+      }
+      console.log(finalClimate);
+      return finalClimate;
+    }
+
     ngOnDestroy() {
         this.sub.unsubscribe();
     }

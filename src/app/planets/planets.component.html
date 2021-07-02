@@ -1,64 +1,112 @@
-<table>
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Rotation Period</th>
-            <th>Orbital Period</th>
-            <th>Diameter</th>
-            <th>Climate</th>
-            <th>Gravity</th>
-            <th>Terrain</th>
-            <th>Surface Water</th>
-            <th>Population</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let planet of planetsArray; let i = index">
-            <td>
-                <a [routerLink]="['/planets', i + 1]">    
-                {{planet.name}}</a>
-            </td>
-            <td>{{planet.rotation_period}}</td>
-            <td>{{planet.orbital_period}}</td>
-            <td>{{planet.diameter}}</td>
-            <td>{{planet.climate}}</td>
-            <td>{{planet.gravity}}</td>
-            <td>{{planet.terrain}}</td>
-            <td>{{planet.surface_water}}</td>
-            <td>{{planet.population}}</td>
-        </tr>
-    </tbody>
-</table>
-  
+<br>
 <div *ngIf="dataAvailable">
-    <highcharts-chart
-        style="width: 45%; display: block; margin: auto; float: left"
-        [Highcharts] = "highcharts" 
-        [options] = "chartOptions[0].chartConfig" 
-        style = "width: 100%; height: 400px; display: block;">
-    </highcharts-chart>
-    <highcharts-chart
-        style="width: 45%; display: block; margin: auto; float: right"
-        [Highcharts] = "highcharts" 
-        [options] = "chartOptions[1].chartConfig" 
-        style = "width: 100%; height: 400px; display: block;">
-    </highcharts-chart>
-    <highcharts-chart
-        style="width: 45%; display: block; margin: auto; float: right"
-        [Highcharts] = "highcharts" 
-        [options] = "chartOptions[2].chartConfig" 
-        style = "width: 100%; height: 400px; display: block;">
-    </highcharts-chart>
-    <highcharts-chart
-        style="width: 45%; display: block; margin: auto; float: right"
-        [Highcharts] = "highcharts" 
-        [options] = "chartOptions[3].chartConfig" 
-        style = "width: 100%; height: 400px; display: block;">
-    </highcharts-chart>
-    <highcharts-chart
-        style="width: 45%; display: block; margin: auto; float: right"
-        [Highcharts] = "highcharts" 
-        [options] = "chartOptions[4].chartConfig" 
-        style = "width: 100%; height: 400px; display: block;">
-    </highcharts-chart>
-</div>  
+
+    <div>
+        <!-- Displays the line/column chart for the characters height and weight that that extends the length of the page -->
+        <highcharts-chart
+            style="width: 100%; display: block; height: 400px;"
+            [Highcharts] = "highcharts" 
+            [options] = "chartOptions[2].chartConfig">
+        </highcharts-chart>
+    </div>
+
+    <br>    
+
+    <br>
+
+    <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="20px">
+        <!-- Table takes up 60% of the width -->
+        <mat-card fxFlex="65">
+            <highcharts-chart
+                style="width: 100%; display: block; height: 400px;"
+                [Highcharts] = "highcharts" 
+                [options] = "chartOptions[1].chartConfig">
+            </highcharts-chart>
+        </mat-card>
+    <!-- Chart takes up 40% of the width -->
+        <mat-card fxFlex="35">
+        <highcharts-chart
+            style="width: 100%; display: block; height: 400px;"
+            [Highcharts] = "highcharts" 
+            [options] = "chartOptions[3].chartConfig">
+        </highcharts-chart>
+        </mat-card>
+    </div>
+
+    <br>
+
+    <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="20px" class="stats-cards">
+        <mat-card fxFlex="65">
+            <!-- Pie chart that displays the height of each character as a percentage of total character height -->
+            <highcharts-chart
+                style = "width: 100%; height: 300px; display: block;"
+                [Highcharts] = "highcharts" 
+                [options] = "chartOptions[4].chartConfig">
+            </highcharts-chart>
+        </mat-card>
+        <mat-card fxFlex="35">
+            <!-- 3D pie chart that displays the characters sex by percentage -->
+            <highcharts-chart
+                style = "width: 100%; height: 300px; display: block;"
+                [Highcharts] = "highcharts" 
+                [options] = "chartOptions[5].chartConfig">
+            </highcharts-chart>
+        </mat-card>
+    </div>
+
+    <br>
+
+    <mat-divider></mat-divider>
+
+    <div>
+        <!-- Displays the line/column chart for the characters height and weight that that extends the length of the page -->
+        <highcharts-chart
+            style="width: 100%; display: block; height: 400px;"
+            [Highcharts] = "highcharts" 
+            [options] = "chartOptions[0].chartConfig">
+        </highcharts-chart>
+    </div>
+
+    <br>
+
+    <mat-divider></mat-divider>
+
+    <br>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Rotation Period</th>
+                <th>Orbital Period</th>
+                <th>Diameter</th>
+                <th>Climate</th>
+                <th>Gravity</th>
+                <th>Terrain</th>
+                <th>Surface Water</th>
+                <th>Population</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let planet of planetsArray; let i = index">
+                <td>
+                    <a [routerLink]="['/planets', i + 1]">    
+                    {{planet.name}}</a>
+                </td>
+                <td>{{planet.rotation_period}}</td>
+                <td>{{planet.orbital_period}}</td>
+                <td>{{planet.diameter}}</td>
+                <td>{{planet.climate}}</td>
+                <td>{{planet.gravity}}</td>
+                <td>{{planet.terrain}}</td>
+                <td>{{planet.surface_water}}</td>
+                <td>{{planet.population}}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <br>
+
+    <mat-divider></mat-divider>
+    
+</div>
