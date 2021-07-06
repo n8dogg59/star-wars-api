@@ -59,6 +59,7 @@ export class PlanetsComponent implements OnInit , OnDestroy {
       },
       title: {
         text: 'Diameter of Each Planet in Star Wars Universe'
+<<<<<<< HEAD
       },
       xAxis: {
         categories: ['Africa', 'America', 'Asia', 'Europe', 'Oceania'],
@@ -471,6 +472,58 @@ export class PlanetsComponent implements OnInit , OnDestroy {
           ]
       }]
     }
+=======
+      },
+      subtitle: {
+        text: 'Source: <a href="https://swapi.dev/">swapi.dev</a>'
+      },
+      xAxis: {
+        categories: ['Africa', 'America', 'Asia', 'Europe', 'Oceania'],
+        title: {
+            text: null
+        }
+      },
+      yAxis: {
+        min: 0,
+        title: {
+            text: 'Diameter'
+        },
+        labels: {
+            overflow: 'justify'
+        }
+      },
+      tooltip: {
+        valueSuffix: ' miles'
+      },
+      plotOptions: {
+        bar: {
+            dataLabels: {
+                enabled: true
+            }
+        }
+      },
+      legend: {
+        layout: 'vertical',
+        align: 'right',
+        verticalAlign: 'top',
+        x: -40,
+        y: 80,
+        floating: true,
+        borderWidth: 1,
+        backgroundColor: '#FFFFFF',
+        shadow: true
+      },
+      credits: {
+        enabled: false
+      },
+      series: [{
+        name: 'Population',
+        type: 'bar',
+        data: [107, 31, 635, 203, 2]
+      }]
+    }
+
+>>>>>>> 54441be8ccd65a0fd87b1d8c96e990295e098e9d
 
     constructor(private apiCallService: apiCallService) { }
   
@@ -668,6 +721,7 @@ export class PlanetsComponent implements OnInit , OnDestroy {
       let total = 0;
       let inst = 0;
 
+<<<<<<< HEAD
       
       for (let i = 0; i < climateArr.length; i++) {
         let name = climateArr[i].name;
@@ -704,4 +758,6 @@ export class PlanetsComponent implements OnInit , OnDestroy {
     ngOnDestroy() {
         this.sub.unsubscribe();
     }
+=======
+>>>>>>> 54441be8ccd65a0fd87b1d8c96e990295e098e9d
 }
