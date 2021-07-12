@@ -17,7 +17,14 @@ import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDividerModule } from '@angular/material/divider';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { MatCardModule} from '@angular/material/card'
+import { MatCardModule} from '@angular/material/card';
+import { TestComponent } from './components/people/shared/test/test.component';
+import { PeopleTableComponent } from './components/people/shared/people-table/people-table.component';
+import { PeoplePieChartComponent } from './components/people/shared/people-pie-chart/people-pie-chart.component';
+import { PeopleLineColumnChartComponent } from './components/people/shared/people-line-column-chart/people-line-column-chart.component';
+import { PeopleThreeDPieChartComponent } from './components/people/shared/people-three-d-pie-chart/people-three-d-pie-chart.component';
+import { PeopleDonutChartComponent } from './components/people/shared/people-donut-chart/people-donut-chart.component';
+import { PeopleColumnDChartComponent } from './components/people/shared/people-column-d-chart/people-column-d-chart.component'
 
 @NgModule({
   declarations: [
@@ -27,7 +34,14 @@ import { MatCardModule} from '@angular/material/card'
     HomeComponent,
     StarshipsComponent,
     PlanetsComponent,
-    PlanetDetailComponent
+    PlanetDetailComponent,
+    TestComponent,
+    PeopleTableComponent,
+    PeoplePieChartComponent,
+    PeopleLineColumnChartComponent,
+    PeopleThreeDPieChartComponent,
+    PeopleDonutChartComponent,
+    PeopleColumnDChartComponent
   ],
   imports: [
     BrowserModule,
