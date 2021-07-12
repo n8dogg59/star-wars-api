@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Planets } from '../planets';
-import { apiCallService } from '../apicall.service';
+import { Planets } from '../../models/planets';
+import { apiCallService } from '../../apicall.service';
 import { Subscription } from 'rxjs';
 import * as Highcharts from 'highcharts';
 import HC_exporting from "highcharts/highcharts-more";

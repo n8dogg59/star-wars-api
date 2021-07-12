@@ -5,12 +5,12 @@ import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { PeopleComponent } from './people/people.component';
-import { PersonDetailComponent } from './people/person-detail.component';
-import { HomeComponent } from './home/home.component';
-import { StarshipsComponent } from './starships/starships.component';
-import { PlanetsComponent } from './planets/planets.component';
-import { PlanetDetailComponent } from './planets/planet-detail.component';
+import { PeopleComponent } from './components/people/people.component';
+import { PersonDetailComponent } from './components/people/person-detail.component';
+import { HomeComponent } from './components/home/home.component';
+import { StarshipsComponent } from './components/starships/starships.component';
+import { PlanetsComponent } from './components/planets/planets.component';
+import { PlanetDetailComponent } from './components/planets/planet-detail.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HighchartsChartModule } from 'highcharts-angular';
 import { CommonModule } from '@angular/common';

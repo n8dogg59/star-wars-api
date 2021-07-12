@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
-import { People } from "../people";
-import { apiCallService } from "../apicall.service";
+import { People } from "../../models/people";
+import { apiCallService } from "../../apicall.service";
 import { Subscription } from "rxjs";
 import * as Highcharts from 'highcharts';
 import HC_exporting from 'highcharts/modules/exporting';

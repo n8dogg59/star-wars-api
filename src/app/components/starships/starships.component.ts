@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Starships } from '../starships';
-import { apiCallService } from "../apicall.service";
+import { Starships } from '../../models/starships';
+import { apiCallService } from "../../apicall.service";
 import { Subscription } from "rxjs";
 import * as Highcharts from 'highcharts';
 

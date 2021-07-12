@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { People } from './people';
+import { People } from './models/people';
 
 import { Observable, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators'
-import { Starships } from './starships';
-import { Planets } from './planets';
+import { Starships } from './models/starships';
+import { Planets } from './models/planets';
 
 
 @Injectable({

@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Planets } from '../planets';
-import { apiCallService } from '../apicall.service';
+import { People } from '../../models/people';
+import { apiCallService } from "../../apicall.service";
+
 
 @Component({
-  templateUrl: './planet-detail.component.html'
+  templateUrl: './person-detail.component.html'
 })
-export class PlanetDetailComponent implements OnInit {
-
-  pageTitle: string = 'Planet Detail';
-  planetDetail: Planets | undefined;
+export class PersonDetailComponent implements OnInit {
+  pageTitle: string = 'Person Detail';
+  personDetail: People | undefined;
 
   constructor(private route: ActivatedRoute,
               private apiCallService: apiCallService) { }
@@ -17,11 +17,11 @@ export class PlanetDetailComponent implements OnInit {
   ngOnInit(): void {
     let id: string = parseInt(this.route.snapshot.params['id']).toString();
     console.log(id);
-    this.apiCallService.getPlanet(id)
+    this.apiCallService.getPerson(id)
       .subscribe(
-        (data: Planets) => {
-          this.planetDetail = data
-          console.log(this.planetDetail);
+        (data: People) => {
+          this.personDetail = data
+          console.log(this.personDetail);
         },
         (err: any) => console.log(err)
       );
