@@ -10,7 +10,7 @@ import { Subscription } from "rxjs";
   })
 
 export class PeopleComponent implements OnInit, OnDestroy {
-    // dataAvailable = false;
+    dataAvailable = false;
     allPeople: People[] | undefined;
     stringJson: any;
     stringObject: any;
@@ -29,6 +29,8 @@ export class PeopleComponent implements OnInit, OnDestroy {
             this.peopleArray = this.stringObject.results;
             console.log('All done getting people. ', this.peopleArray)
             // HC_exporting(Highcharts);
+            this.dataAvailable = true;
+
         },
           (err: any) => console.log(err)
       )

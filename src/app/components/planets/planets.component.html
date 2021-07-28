@@ -73,7 +73,7 @@
 
     <br>
 
-    <table>
+    <table class="table table-striped mr-3">
         <thead>
             <tr>
                 <th>Name</th>
@@ -94,13 +94,14 @@
                     {{planet.name}}</a>
                 </td>
                 <td>{{planet.rotation_period}}</td>
-                <td>{{planet.orbital_period}}</td>
-                <td>{{planet.diameter}}</td>
+                <td>{{planet.orbital_period | number}}</td>
+                <td>{{planet.diameter | number}}</td>
                 <td>{{planet.climate}}</td>
                 <td>{{planet.gravity}}</td>
                 <td>{{planet.terrain}}</td>
                 <td>{{planet.surface_water}}</td>
-                <td>{{planet.population}}</td>
+                <td *ngIf="planet.population === 'unknown'">unknown</td>
+                <td *ngIf="planet.population !=='unknown'">{{planet.population | number}}</td>
             </tr>
         </tbody>
     </table>

@@ -1,6 +1,6 @@
 <br>
 <!-- If statement makes sure api data loads before loading the page -->
-<!-- <div *ngIf="dataAvailable"> -->
+<div *ngIf="dataAvailable">
     <div *ngIf = "peopleArray">
         <people-line-column-chart [peopleArray]=peopleArray></people-line-column-chart>
     </div>
@@ -52,4 +52,4 @@
             </div>
         </div>
     </div>
-<!-- </div> -->
+</div>

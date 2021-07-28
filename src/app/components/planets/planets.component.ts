@@ -332,7 +332,9 @@ export class PlanetsComponent implements OnInit , OnDestroy {
             alpha: 5,
             depth: 55,
             viewDistance: 50
-        }
+        },
+        marginBottom: 25,
+        marginRight: 75
       },
       title: {
         text: 'Surface Water Breakdown'
@@ -441,7 +443,7 @@ export class PlanetsComponent implements OnInit , OnDestroy {
               distance: -50,
               style: {
                   fontWeight: 'bold',
-                  color: 'white',
+                  color: 'black',
                   fontSize: '100%'
               }
           },
@@ -503,10 +505,11 @@ export class PlanetsComponent implements OnInit , OnDestroy {
             console.log('All done getting planets. ', this.planetsArray)
             for (let i = 0; i < this.planetsArray.length; i++) {
               let planet = this.planetsArray[i].name;
-              let orbital = parseInt(this.planetsArray[i].orbital_period);
               let rotation = parseInt(this.planetsArray[i].rotation_period);
-              let population = parseInt(this.planetsArray[i].population);
+              let orbital = parseInt(this.planetsArray[i].orbital_period);
               let diameter = parseInt(this.planetsArray[i].diameter);
+              let population = parseInt(this.planetsArray[i].population);
+              console.log(population);
               if (diameter > 20000) {
                 diameter = 20000
               }
